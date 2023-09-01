@@ -1,0 +1,8 @@
+{
+	"useTabs": true,
+	"singleQuote": true,
+	"trailingComma": "all",
+	"semi": false,
+	"bracketSpacing": false,
+	"overrides": [{"files": "*.svelte", "options": {"parser": "svelte"}}]
+}
