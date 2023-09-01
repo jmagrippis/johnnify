@@ -22,5 +22,5 @@
 	})
 </script>
 
-<Header />
+<Header {session} />
 <slot />

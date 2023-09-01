@@ -40,7 +40,7 @@
 	}
 
 	html {
-		@apply bg-surface-1 text-copy-base transition-colors;
+		@apply bg-surface-1 text-lg text-copy-base transition-colors;
 	}
 
 	a {

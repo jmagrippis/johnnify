@@ -1,6 +1,16 @@
 <script lang="ts">
 	export let data
-	$: redirectTo = `${data.url}/auth/callback`
+
+	async function signInWithGitHub() {
+		const signInResponse = await data.supabase.auth.signInWithOAuth({
+			provider: 'github',
+		})
+
+		if (signInResponse.error) {
+			console.error(signInResponse.error)
+			return
+		}
+	}
 </script>
 
 <svelte:head>
@@ -8,5 +18,6 @@
 </svelte:head>
 
 <div>
-	{redirectTo}
+	<button class="text-2xl" on:click={signInWithGitHub}>Login with GitHub</button
+	>
 </div>
