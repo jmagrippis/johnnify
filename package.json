@@ -10,10 +10,13 @@
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"test": "vitest",
 		"lint": "prettier --check . && eslint .",
-		"format": "prettier --write ."
+		"format": "prettier --write .",
+		"generate": "supabase gen types typescript --local > src/lib/generated/DatabaseDefinitions.ts && prettier --write ./src/lib/generated"
 	},
 	"devDependencies": {
 		"@fontsource-variable/inconsolata": "^5.0.8",
+		"@supabase/auth-helpers-sveltekit": "^0.10.2",
+		"@supabase/supabase-js": "^2.33.1",
 		"@sveltejs/adapter-auto": "^2.0.0",
 		"@sveltejs/kit": "^1.20.4",
 		"@tailwindcss/forms": "^0.5.6",
@@ -27,6 +30,7 @@
 		"prettier": "^3.0.3",
 		"prettier-plugin-svelte": "^3.0.3",
 		"prettier-plugin-tailwindcss": "^0.5.4",
+		"supabase": "^1.88.0",
 		"svelte": "^4.0.5",
 		"svelte-check": "^3.4.3",
 		"tailwindcss": "^3.3.3",
