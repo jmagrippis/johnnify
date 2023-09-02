@@ -1,5 +1,5 @@
 <script lang="ts">
-	import GitHubIcon from './github.svg?component'
+	import GitHubIcon from '$lib/icons/github.svg?component'
 
 	export let data
 
@@ -19,7 +19,7 @@
 	<title>Login</title>
 </svelte:head>
 
-<div class="flex flex-col items-center">
+<div class="flex grow flex-col items-center justify-center">
 	<button
 		class="relative flex items-center gap-4 rounded bg-gradient-to-br from-primary-900 via-primary-600 to-secondary-400 px-4 py-2 text-2xl shadow-low transition-shadow hover:shadow-mid active:top-[-1px]"
 		on:click={signInWithGitHub}
