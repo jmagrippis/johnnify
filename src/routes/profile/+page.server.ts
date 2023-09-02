@@ -8,4 +8,11 @@ export const load: PageServerLoad = async ({locals: {getSession}}) => {
 	if (!session) {
 		throw redirect(303, '/')
 	}
+
+	return {
+		meta: {
+			title: 'Profile',
+			description: 'Manage your account and view your profile details.',
+		},
+	}
 }

@@ -9,5 +9,11 @@ export const load: PageServerLoad = async ({url, locals: {getSession}}) => {
 		throw redirect(303, '/profile')
 	}
 
-	return {url: url.origin}
+	return {
+		meta: {
+			title: 'Login',
+			description:
+				'Login to your account, to purchase or view special content!',
+		},
+	}
 }
