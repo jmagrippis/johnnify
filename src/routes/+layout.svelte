@@ -1,5 +1,8 @@
 <script lang="ts">
 	import {onMount} from 'svelte'
+	import '@fontsource-variable/inconsolata'
+
+	import '../app.css'
 
 	import {invalidate} from '$app/navigation'
 	import type {LayoutData} from './$types'
