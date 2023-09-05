@@ -1,6 +1,7 @@
 <script lang="ts">
 	import {onMount} from 'svelte'
 	import '@fontsource-variable/inconsolata'
+	import '@fontsource/noto-color-emoji/emoji.css'
 
 	import '../app.css'
 
