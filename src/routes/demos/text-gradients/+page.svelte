@@ -1,4 +1,4 @@
-<main class="container grow">
+<main class="container grow px-2">
 	<section class="grow py-8 text-center">
 		<h1 class="text-bold text-5xl">Text Gradients</h1>
 		<h2 class="flex flex-col text-4xl sm:block">
@@ -6,10 +6,13 @@
 		</h2>
 	</section>
 	<section class="text-xl">
-		<p>
-			Demos made to accompany a video by Johnny! Check it out and play around!
+		<p class="mb-6">
+			Practical demos made to accompany <a
+				href="https://www.youtube.com/watch?v=Bual_cAToQQ"
+				>this video tutorial by Johnny</a
+			>! Check it out and play around!
 		</p>
-		<ul>
+		<ul class="text-3xl">
 			<li>
 				<a href="/demos/text-gradients/vanilla">🍦 Vanilla CSS Examples</a>
 			</li>
