@@ -6,7 +6,7 @@ export const load: PageServerLoad = async ({locals: {getSession}}) => {
 
 	// if the user is NOT logged in return them to the home page
 	if (!session) {
-		throw redirect(303, '/')
+		throw redirect(303, '/login')
 	}
 
 	return {
