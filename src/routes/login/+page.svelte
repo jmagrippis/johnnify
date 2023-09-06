@@ -130,7 +130,7 @@
 				</button>
 				<button
 					type="button"
-					class="underline decoration-emphasis"
+					class="underline decoration-emphasis hover:decoration-emphasis-hover"
 					on:click={() => {
 						loginOrSignup = 'signup'
 					}}
@@ -183,7 +183,7 @@
 				</button>
 				<button
 					type="button"
-					class="underline decoration-emphasis"
+					class="underline decoration-emphasis hover:decoration-emphasis-hover"
 					on:click={() => {
 						loginOrSignup = 'login'
 					}}
