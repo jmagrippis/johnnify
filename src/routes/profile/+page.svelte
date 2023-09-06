@@ -17,8 +17,11 @@
 	}
 </script>
 
-<main>
+<main class="container grow px-2">
 	<h1 class="text-4xl">Profile</h1>
 	<p>You are logged in as <strong>{session?.user.email}</strong></p>
-	<button on:click={signOut}>logout</button>
+	<button
+		class="underline decoration-emphasis hover:decoration-emphasis-hover"
+		on:click={signOut}>logout</button
+	>
 </main>
