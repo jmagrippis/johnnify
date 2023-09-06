@@ -26,6 +26,7 @@ module.exports = {
 			white: colors.white,
 			transparent: 'transparent',
 			current: 'currentColor',
+			error: '#be123c',
 		},
 		boxShadow: {
 			low: 'var(--shadow-elevation-low)',
