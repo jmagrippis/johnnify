@@ -11,6 +11,8 @@
 	import Footer from './Footer.svelte'
 	import {page} from '$app/stores'
 	import {defaultMeta} from '$lib/defaultMeta'
+	import {isTheme, theme, type Theme} from '$lib/stores/theme'
+	import {browser} from '$app/environment'
 
 	export let data: LayoutData
 
@@ -19,7 +21,17 @@
 		: defaultMeta.title
 	$: description = $page.data.meta?.description ?? defaultMeta.description
 
+	const syncTheme = (nextTheme: Theme) => {
+		document.documentElement.dataset.theme = nextTheme
+		localStorage.setItem('theme', nextTheme)
+	}
+
+	$: browser && $theme && syncTheme($theme)
+
 	onMount(() => {
+		const documentTheme = document.documentElement.dataset.theme
+		$theme = isTheme(documentTheme) ? documentTheme : 'auto'
+
 		const {
 			data: {subscription},
 		} = data.supabase.auth.onAuthStateChange((_, session) => {
