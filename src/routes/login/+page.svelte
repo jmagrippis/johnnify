@@ -1,6 +1,7 @@
 <script lang="ts">
 	import {goto} from '$app/navigation'
 	import GitHubIcon from '$lib/icons/github.svg?component'
+	import Spinner from '$lib/icons/spinner.svg?component'
 
 	export let data
 
@@ -81,6 +82,7 @@
 			<button
 				class="relative flex items-center gap-4 rounded bg-gradient-to-br from-primary-900 via-primary-600 to-secondary-400 px-4 py-2 text-2xl shadow-low transition-shadow hover:shadow-mid active:top-[-1px]"
 				on:click={signInWithGitHub}
+				disabled={formState === 'submitting'}
 			>
 				<GitHubIcon class="w-8" /><span class="grow">Login with GitHub</span>
 			</button>
@@ -125,6 +127,7 @@
 				/>
 				<button
 					class="relative flex items-center justify-center gap-4 rounded bg-gradient-to-br from-primary-900 via-primary-600 to-secondary-400 px-4 py-2 text-2xl shadow-low transition-shadow hover:shadow-mid active:top-[-1px]"
+					disabled={formState === 'submitting'}
 				>
 					<span>💌</span><span>Login with email</span>
 				</button>
@@ -134,6 +137,7 @@
 					on:click={() => {
 						loginOrSignup = 'signup'
 					}}
+					disabled={formState === 'submitting'}
 				>
 					or create a new account!
 				</button>
@@ -178,6 +182,7 @@
 				/>
 				<button
 					class="relative flex items-center justify-center gap-4 rounded bg-gradient-to-br from-primary-900 via-primary-600 to-secondary-400 px-4 py-2 text-2xl shadow-low transition-shadow hover:shadow-mid active:top-[-1px]"
+					disabled={formState === 'submitting'}
 				>
 					<span>💌</span><span>Signup</span>
 				</button>
@@ -187,10 +192,14 @@
 					on:click={() => {
 						loginOrSignup = 'login'
 					}}
+					disabled={formState === 'submitting'}
 				>
 					or login to an existing account
 				</button>
 			</form>
+		{/if}
+		{#if formState === 'submitting'}
+			<Spinner class="w-12 text-emphasis" />
 		{/if}
 		{#if formState instanceof Error}
 			<strong>🚨 {formState.message} 🚨</strong>
