@@ -62,11 +62,43 @@ export const POST: RequestHandler = async ({request}) => {
 				break
 			case 'customer.subscription.created':
 			case 'customer.subscription.updated':
-			case 'customer.subscription.deleted':
+			case 'customer.subscription.deleted': {
+				const subscription = event.data.object as Stripe.Subscription
+				const customerId =
+					typeof subscription.customer === 'string'
+						? subscription.customer
+						: subscription.customer.id
+
 				await manageSubscriptionStatusChange(
-					event.data.object as Stripe.Subscription,
+					subscription.id,
+					customerId,
 					event.type === 'customer.subscription.created',
 				)
+				break
+			}
+			case 'checkout.session.completed':
+				{
+					const checkoutSession = event.data.object as Stripe.Checkout.Session
+					if (checkoutSession.mode === 'subscription') {
+						const subscriptionId =
+							typeof checkoutSession.subscription === 'string'
+								? checkoutSession.subscription
+								: checkoutSession.subscription?.id
+						const customerId =
+							typeof checkoutSession.customer === 'string'
+								? checkoutSession.customer
+								: checkoutSession.customer?.id
+						if (!subscriptionId || !customerId) break
+
+						await manageSubscriptionStatusChange(
+							subscriptionId,
+							customerId,
+							true,
+						)
+					} else {
+						console.log(`unhandled checkout mode: ${checkoutSession.mode}!`)
+					}
+				}
 				break
 			default:
 				console.log(`we did not handle related event: ${event.type}!`)
