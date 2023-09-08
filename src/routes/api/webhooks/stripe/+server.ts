@@ -4,6 +4,7 @@ import type Stripe from 'stripe'
 import {STRIPE_WEBHOOK_SECRET} from '$env/static/private'
 import {stripe} from '$lib/server/stripe'
 import type {RequestHandler} from './$types'
+import {upsertProductRecord} from '$lib/server/supabase/upsertProductRecord'
 
 const handledEvents = [
 	'product.created',
@@ -49,8 +50,12 @@ export const POST: RequestHandler = async ({request}) => {
 
 	if (isHandledEvent(event.type)) {
 		switch (event.type) {
+			case 'product.created':
+			case 'product.updated':
+				await upsertProductRecord(event.data.object as Stripe.Product)
+				break
 			default:
-				console.log('we are handling this!')
+				console.log(`we did not handle related event: ${event.type}!`)
 		}
 	}
 
