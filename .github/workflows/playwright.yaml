@@ -25,6 +25,8 @@ jobs:
           SUPABASE_AUTH_GITHUB_CLIENT_ID: ${{ secrets.SUPABASE_AUTH_GITHUB_CLIENT_ID }}
           SUPABASE_AUTH_GITHUB_SECRET: ${{ secrets.SUPABASE_AUTH_GITHUB_SECRET }}
           PLAYWRIGHT_LOGGED_IN_PASSWORD: ${{ secrets.PLAYWRIGHT_LOGGED_IN_PASSWORD }}
+          PUBLIC_STRIPE_KEY: ${{ vars.PUBLIC_STRIPE_KEY }}
+          STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
         run: npx playwright test
       - uses: actions/upload-artifact@v3
         if: always()
