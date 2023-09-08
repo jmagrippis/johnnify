@@ -33,7 +33,7 @@ export const POST: RequestHandler = async ({request}) => {
 		if (!signature) throw new Error('No signature')
 
 		const parsedBody = await request.text()
-		event = stripe.webhooks.constructEvent(
+		event = await stripe.webhooks.constructEventAsync(
 			parsedBody,
 			signature,
 			STRIPE_WEBHOOK_SECRET,
