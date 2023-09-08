@@ -1,6 +1,6 @@
-import type {Database} from '$lib/generated/DatabaseDefinitions'
 import type Stripe from 'stripe'
 
+import type {Database} from '$lib/generated/DatabaseDefinitions'
 import {supabaseAdmin} from './admin'
 
 type Price = Database['public']['Tables']['prices']['Row']
