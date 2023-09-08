@@ -1,9 +1,9 @@
-import type Stripe from 'stripe'
-import type {RequestHandler} from './$types'
-import {stripe} from '$lib/server/stripe'
 import {json} from '@sveltejs/kit'
+import type Stripe from 'stripe'
 
-const STRIPE_WEBHOOK_SECRET = '....'
+import {STRIPE_WEBHOOK_SECRET} from '$env/static/private'
+import {stripe} from '$lib/server/stripe'
+import type {RequestHandler} from './$types'
 
 const handledEvents = [
 	'product.created',

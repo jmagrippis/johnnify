@@ -27,6 +27,7 @@ jobs:
           PLAYWRIGHT_LOGGED_IN_PASSWORD: ${{ secrets.PLAYWRIGHT_LOGGED_IN_PASSWORD }}
           PUBLIC_STRIPE_KEY: ${{ vars.PUBLIC_STRIPE_KEY }}
           STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
+          STRIPE_WEBHOOK_SECRET: ${{ secrets.STRIPE_WEBHOOK_SECRET }}
         run: npx playwright test
       - uses: actions/upload-artifact@v3
         if: always()
