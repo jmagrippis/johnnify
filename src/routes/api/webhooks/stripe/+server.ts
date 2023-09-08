@@ -5,6 +5,7 @@ import {STRIPE_WEBHOOK_SECRET} from '$env/static/private'
 import {stripe} from '$lib/server/stripe'
 import type {RequestHandler} from './$types'
 import {upsertProductRecord} from '$lib/server/supabase/upsertProductRecord'
+import {upsertPriceRecord} from '$lib/server/supabase/upsertPriceRecord'
 
 const handledEvents = [
 	'product.created',
@@ -53,6 +54,10 @@ export const POST: RequestHandler = async ({request}) => {
 			case 'product.created':
 			case 'product.updated':
 				await upsertProductRecord(event.data.object as Stripe.Product)
+				break
+			case 'price.created':
+			case 'price.updated':
+				await upsertPriceRecord(event.data.object as Stripe.Price)
 				break
 			default:
 				console.log(`we did not handle related event: ${event.type}!`)
