@@ -1,6 +1,6 @@
-import type {Database} from '$lib/generated/DatabaseDefinitions'
 import type Stripe from 'stripe'
 
+import type {Database} from '$lib/generated/DatabaseDefinitions'
 import {supabaseAdmin} from './admin'
 
 type Product = Database['public']['Tables']['products']['Row']
@@ -15,6 +15,7 @@ export const upsertProductRecord = async (product: Stripe.Product) => {
 		metadata: product.metadata,
 		// TODO: DB Migration
 		// so we can include product.features
+		// and default_price_id
 	}
 
 	const {error} = await supabaseAdmin.from('products').upsert(productData)
