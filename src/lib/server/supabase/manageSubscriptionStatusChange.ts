@@ -14,10 +14,12 @@ const copyBillingDetailsToCustomer = async (
 	userId: string,
 	payment_method: Stripe.PaymentMethod,
 ) => {
-	//Todo: check this assertion
-	const customer = payment_method.customer as string
+	const customerId =
+		typeof payment_method.customer === 'string'
+			? payment_method.customer
+			: payment_method.customer?.id
 	const {name, phone, address} = payment_method.billing_details
-	if (!name || !phone || !address) return
+	if (!customerId || !name || !phone || !address) return
 
 	// customers.update wants undefined,
 	// where address can have `null` fields
@@ -29,7 +31,7 @@ const copyBillingDetailsToCustomer = async (
 		postal_code: address.postal_code || undefined,
 		state: address.state || undefined,
 	}
-	await stripe.customers.update(customer, {
+	await stripe.customers.update(customerId, {
 		name,
 		phone,
 		address: stripeAddressParam,
