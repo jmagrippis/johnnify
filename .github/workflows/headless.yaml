@@ -1,4 +1,4 @@
-name: Headless test suite
+name: Headless Tests
 
 on:
   pull_request:
