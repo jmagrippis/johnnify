@@ -23,5 +23,7 @@ export default defineConfig({
 	plugins: [sveltekit(), svgPlugin],
 	test: {
 		include: ['src/**/*.{test,spec}.{js,ts}'],
+		mockReset: true,
+		globalSetup: 'src/vitestSetup.ts',
 	},
 })
