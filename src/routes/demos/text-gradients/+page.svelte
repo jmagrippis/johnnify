@@ -1,5 +1,5 @@
-<main class="container grow px-2">
-	<section class="grow py-8 text-center">
+<main class="container flex max-w-prose grow flex-col justify-center px-2">
+	<section class="py-8 text-center">
 		<h1 class="text-bold text-5xl">Text Gradients</h1>
 		<h2 class="flex flex-col text-4xl sm:block">
 			with Vanilla CSS, <span>or Tailwind!</span>
