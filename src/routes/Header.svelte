@@ -22,7 +22,7 @@
 
 	$: nextTheme = deriveNextTheme($theme)
 
-	const activePageClasses = 'pointer-events-none decoration-dashed'
+	const activePageClasses = 'decoration-dashed'
 </script>
 
 <header class="mb-2 bg-surface-2">
