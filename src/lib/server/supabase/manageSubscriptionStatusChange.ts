@@ -57,6 +57,7 @@ export const manageSubscriptionStatusChange = async (
 		.select('id')
 		.eq('stripe_customer_id', customerId)
 		.single()
+	// TODO: Handle when we don't have that customer mapped yet!
 	if (noCustomerError) throw noCustomerError
 
 	const {id: userId} = customerData

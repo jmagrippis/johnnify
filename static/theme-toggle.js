@@ -2,7 +2,6 @@ const STORAGE_KEY = 'theme'
 
 const getColorPreference = () => {
 	const currentTheme = localStorage.getItem(STORAGE_KEY)
-	console.log(currentTheme)
 	return currentTheme ?? 'auto'
 }
 
