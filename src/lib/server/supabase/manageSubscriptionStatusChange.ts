@@ -46,21 +46,56 @@ const copyBillingDetailsToCustomer = async (
 	if (error) throw error
 }
 
+const getUserViaEmail = async (email: string) => {
+	const {data, error} = await supabaseAdmin
+		.from('users')
+		.select('id')
+		.match({email})
+		.single()
+
+	return !error && data ? data : null
+}
+
 export const manageSubscriptionStatusChange = async (
 	stripeSubscriptionId: string,
 	customerId: string,
 	isNewSubscription: boolean,
+	email: string | null,
 ) => {
 	// Get customer's UUID from mapping table.
+	let userId: string
+
 	const {data: customerData, error: noCustomerError} = await supabaseAdmin
 		.from('customers')
 		.select('id')
 		.eq('stripe_customer_id', customerId)
 		.single()
-	// TODO: Handle when we don't have that customer mapped yet!
-	if (noCustomerError) throw noCustomerError
+	if (customerData && !noCustomerError) {
+		userId = customerData.id
+	} else {
+		if (!email) {
+			throw new Error(
+				`Failed to create user for stripe_customer_id ${customerId}`,
+			)
+		}
+		const user = await getUserViaEmail(email)
 
-	const {id: userId} = customerData
+		if (user) {
+			userId = user.id
+		} else {
+			const {error: createUserError} = await supabaseAdmin.auth.signInWithOtp({
+				email,
+			})
+
+			if (createUserError) throw createUserError
+
+			const newUser = await getUserViaEmail(email)
+
+			if (!newUser) throw new Error(`Failed to create user for email ${email}`)
+
+			userId = newUser.id
+		}
+	}
 
 	const subscription = await stripe.subscriptions.retrieve(
 		stripeSubscriptionId,
