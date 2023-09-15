@@ -73,6 +73,7 @@ export const POST: RequestHandler = async ({request}) => {
 					subscription.id,
 					customerId,
 					event.type === 'customer.subscription.created',
+					null,
 				)
 				break
 			}
@@ -88,12 +89,16 @@ export const POST: RequestHandler = async ({request}) => {
 							typeof checkoutSession.customer === 'string'
 								? checkoutSession.customer
 								: checkoutSession.customer?.id
+						const customerEmail =
+							checkoutSession.customer_details?.email ?? null
+
 						if (!subscriptionId || !customerId) break
 
 						await manageSubscriptionStatusChange(
 							subscriptionId,
 							customerId,
 							true,
+							customerEmail,
 						)
 					} else {
 						console.log(`unhandled checkout mode: ${checkoutSession.mode}!`)
