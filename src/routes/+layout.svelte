@@ -5,7 +5,7 @@
 
 	import '../app.css'
 
-	import {invalidate, onNavigate} from '$app/navigation'
+	import {invalidate} from '$app/navigation'
 	import type {LayoutData} from './$types'
 	import Header from './Header.svelte'
 	import Footer from './Footer.svelte'
@@ -42,21 +42,6 @@
 
 		return () => subscription.unsubscribe()
 	})
-
-	onNavigate((navigation) => {
-		if (
-			document.startViewTransition &&
-			navigation.from?.route.id !== navigation.to?.route.id
-		) {
-			return new Promise((resolve) => {
-				document.startViewTransition &&
-					document.startViewTransition(async () => {
-						resolve()
-						await navigation.complete
-					})
-			})
-		}
-	})
 </script>
 
 <svelte:head>
@@ -73,26 +58,3 @@
 <Header session={data.session} />
 <slot />
 <Footer />
-
-<style lang="postcss">
-	@keyframes fade-out {
-		to {
-			opacity: 0;
-		}
-	}
-
-	@keyframes slide-from-right {
-		from {
-			transform: translateX(100%);
-			box-shadow: var(--shadow-elevation-high);
-		}
-	}
-
-	:root::view-transition-old(root) {
-		animation: 500ms ease-out both fade-out;
-	}
-
-	:root::view-transition-new(root) {
-		animation: 500ms ease-out both slide-from-right;
-	}
-</style>
