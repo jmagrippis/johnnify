@@ -40,9 +40,3 @@
 		<DiscordIcon class="w-5" />
 	</a>
 </footer>
-
-<style>
-	footer {
-		view-transition-name: footer;
-	}
-</style>
