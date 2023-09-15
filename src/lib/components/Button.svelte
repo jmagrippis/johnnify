@@ -1,5 +1,12 @@
+<script lang="ts">
+	export let disabled: boolean | undefined = undefined
+	export let value: string | undefined = undefined
+</script>
+
 <button
-	class="relative rounded bg-gradient-to-br from-primary-900 via-primary-600 to-secondary-400 px-4 py-2 text-2xl shadow-low transition-shadow hover:shadow-mid active:top-[-1px]"
+	class="relative flex items-center justify-center gap-4 rounded bg-gradient-to-br from-primary-900 via-primary-600 to-secondary-400 px-4 py-2 text-2xl shadow-low transition-shadow hover:shadow-mid active:top-[-1px]"
+	{value}
+	{disabled}
 >
 	<slot />
 </button>
