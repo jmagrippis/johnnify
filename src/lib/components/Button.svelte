@@ -4,6 +4,7 @@
 </script>
 
 <button
+	on:click
 	class="relative flex items-center justify-center gap-4 rounded bg-gradient-to-br from-primary-900 via-primary-600 to-secondary-400 px-4 py-2 text-2xl shadow-low transition-shadow hover:shadow-mid active:top-[-1px]"
 	{value}
 	{disabled}
