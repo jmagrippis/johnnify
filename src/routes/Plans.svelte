@@ -2,7 +2,7 @@
 	import Button from '$lib/components/Button.svelte'
 	import CheckIcon from '$lib/icons/check.svg?component'
 	import type {UIProduct} from '$lib/types'
-	import PriceIntervalToggle from './PriceIntervalToggle.svelte'
+	import Toggle from './Toggle.svelte'
 
 	export let products: UIProduct[]
 
@@ -24,12 +24,16 @@
 		Subscribe and start gaining XP today!
 	</h2>
 
-	<PriceIntervalToggle
+	<Toggle
 		enabled={isYearlyBilling}
+		label="toggle-yearly-billing"
 		on:click={() => {
 			isYearlyBilling = !isYearlyBilling
 		}}
-	/>
+	>
+		<span class="font-medium text-copy-base">Annual billing</span>
+		<span class="text-copy-muted">(Two months FREE!)</span>
+	</Toggle>
 
 	<form method="POST" class="mt-8 grid grid-cols-1 md:grid-cols-3">
 		<input type="hidden" name="priceId" value={selectedPrice.id} />
