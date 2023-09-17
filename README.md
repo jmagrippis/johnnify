@@ -11,4 +11,5 @@ Johnny often livestreams the creation of this open-source repo, over at [the Joh
 
 It's also used in short video guides, such as:
 
-[Text Gradient with vanilla CSS 🍦, or with Tailwind! ⛵️ (for your stylish hero sections)](https://www.youtube.com/watch?v=Bual_cAToQQ)
+- [Text Gradient with vanilla CSS 🍦, or with Tailwind! ⛵️ (for your stylish hero sections)](https://www.youtube.com/watch?v=Bual_cAToQQ)
+- [“App-like feel” 😍 with the View Transitions API & SvelteKit!](https://www.youtube.com/watch?v=qcgGJ0J3yOA)
