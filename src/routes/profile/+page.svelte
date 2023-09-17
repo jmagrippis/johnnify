@@ -1,5 +1,7 @@
 <script lang="ts">
 	import {goto} from '$app/navigation'
+	import {transitionsEnabled} from '$lib/stores/transitionsEnabled'
+	import Toggle from '../Toggle.svelte'
 
 	export let data
 
@@ -21,6 +23,17 @@
 <main class="container max-w-prose grow px-2 text-lg">
 	<h1 class="text-4xl">Profile</h1>
 	<p>You are logged in as <strong>{data.session?.user.email}</strong></p>
+
+	<h2 class="text-2xl">Preferences</h2>
+	<p class="m-2">
+		<Toggle
+			enabled={$transitionsEnabled}
+			label="view-transitions-toggle"
+			on:click={() => {
+				$transitionsEnabled = !$transitionsEnabled
+			}}>View Transitions / Animations</Toggle
+		>
+	</p>
 
 	{#if data.subscription?.status === 'active'}
 		<section>

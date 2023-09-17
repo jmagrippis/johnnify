@@ -1,5 +1,6 @@
 <script>
 	export let enabled = false
+	export let label = 'toggle'
 </script>
 
 <div class="flex items-center justify-center">
@@ -9,7 +10,7 @@
 		class:bg-primary-600={enabled}
 		role="switch"
 		aria-checked={enabled}
-		aria-labelledby="annual-billing-label"
+		aria-labelledby={label}
 		on:click
 	>
 		<span
@@ -19,8 +20,7 @@
 			class:translate-x-5={enabled}
 		></span>
 	</button>
-	<span class="ml-3 text-sm" id="annual-billing-label">
-		<span class="font-medium text-copy-base">Annual billing</span>
-		<span class="text-copy-muted">(Two months FREE!)</span>
+	<span class="ml-3 text-sm" id={label}>
+		<slot />
 	</span>
 </div>
