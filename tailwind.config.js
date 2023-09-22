@@ -37,7 +37,7 @@ module.exports = {
 			center: true,
 		},
 		fontFamily: {
-			sans: 'Inconsolata Variable, sans-serif, Noto Color Emoji',
+			sans: '"Inconsolata Variable", sans-serif, "Noto Color Emoji"',
 		},
 		extend: {},
 	},
