@@ -1,21 +1,27 @@
 import {redirect} from '@sveltejs/kit'
+
 import type {RequestHandler} from './$types'
+import {deriveDevice} from './deriveDevice'
+import {channelUrl} from './constants'
 
-const channelUrl = 'www.youtube.com/@johnnifytech'
+export const GET: RequestHandler = ({request}) => {
+	const userAgent = request.headers.get('User-Agent')
 
-export const GET: RequestHandler = async ({request: {headers}}) => {
-	const userAgent = headers.get('User-Agent') ?? ''
+	const device = deriveDevice(userAgent)
 
-	if (/android/i.test(userAgent)) {
-		throw redirect(
-			303,
-			`intent://${channelUrl}#Intent;package=com.google.android.youtube;scheme=https;end`,
-		)
+	let redirectUrl: string
+
+	switch (device) {
+		case 'iOS':
+			redirectUrl = `vnd.youtube://${channelUrl}`
+			break
+		case 'android':
+			redirectUrl = `intent://${channelUrl}#Intent;package=com.google.android.youtube;scheme=https;end`
+			break
+		case 'other':
+		default:
+			redirectUrl = `https://${channelUrl}`
 	}
 
-	if (/iPad|iPhone|iPod/.test(userAgent)) {
-		throw redirect(303, `vnd.youtube://${channelUrl}`)
-	}
-
-	throw redirect(303, `https://${channelUrl}`)
+	throw redirect(303, redirectUrl)
 }
