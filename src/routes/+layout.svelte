@@ -1,19 +1,19 @@
 <script lang="ts">
-	import {onMount} from 'svelte'
 	import '@fontsource-variable/inconsolata'
 	import '@fontsource/noto-color-emoji/emoji.css'
 
 	import '../app.css'
 
+	import {onMount} from 'svelte'
 	import {invalidate, onNavigate} from '$app/navigation'
-	import type {LayoutData} from './$types'
-	import Header from './Header.svelte'
-	import Footer from './Footer.svelte'
 	import {page} from '$app/stores'
+	import {browser} from '$app/environment'
 	import {defaultMeta} from '$lib/defaultMeta'
 	import {isTheme, theme, type Theme} from '$lib/stores/theme'
 	import {transitionsEnabled} from '$lib/stores/transitionsEnabled'
-	import {browser} from '$app/environment'
+	import type {LayoutData} from './$types'
+	import Header from './Header.svelte'
+	import Footer from './Footer.svelte'
 
 	export let data: LayoutData
 
