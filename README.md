@@ -13,3 +13,4 @@ It's also used in short video guides, such as:
 
 - [Text Gradient with vanilla CSS 🍦, or with Tailwind! ⛵️ (for your stylish hero sections)](https://www.youtube.com/watch?v=Bual_cAToQQ)
 - [“App-like feel” 😍 with the View Transitions API & SvelteKit!](https://www.youtube.com/watch?v=qcgGJ0J3yOA)
+- [Stop using Google Fonts in prod 📈 what to do instead! 📉](https://www.youtube.com/watch?v=TKKpVlZRFLc)
