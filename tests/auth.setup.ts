@@ -1,12 +1,7 @@
 import {test as setup, expect} from '@playwright/test'
 import {loggedInCredentials} from './credentials'
-import dotenv from 'dotenv-flow'
 
 setup('authenticate as a regular loggedIn user', async ({page}) => {
-	if (!process.env.CI) {
-		dotenv.config()
-	}
-
 	// Perform authentication steps. Replace these actions with your own.
 	await page.goto('/login')
 	await page

@@ -15,7 +15,8 @@ test('login page', async ({page}) => {
 	).toBeVisible()
 
 	// user can see the form to create a new account
-	page.getByRole('button', {name: 'create a new account'}).click()
+
+	await page.getByRole('button', {name: 'create a new account'}).click()
 	await expect(page.getByRole('button', {name: 'Signup'})).toBeVisible()
 })
 
