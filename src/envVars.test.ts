@@ -1,4 +1,4 @@
-import {expect, it} from 'vitest'
+import {expect, it} from 'bun:test'
 
 it('imports test env vars, also from `.env.test`', () => {
 	expect(process.env.NODE_ENV).toBe('test')

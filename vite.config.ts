@@ -1,6 +1,6 @@
 import {sveltekit} from '@sveltejs/kit/vite'
 import svg from '@poppanator/sveltekit-svg'
-import {defineConfig} from 'vitest/config'
+import {defineConfig} from 'vite'
 
 const svgPlugin = svg({
 	svgoOptions: {
@@ -21,9 +21,4 @@ const svgPlugin = svg({
 
 export default defineConfig({
 	plugins: [sveltekit(), svgPlugin],
-	test: {
-		include: ['src/**/*.{test,spec}.{js,ts}'],
-		mockReset: true,
-		globalSetup: 'src/vitestSetup.ts',
-	},
 })
