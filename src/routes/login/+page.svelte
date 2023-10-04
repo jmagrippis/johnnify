@@ -1,16 +1,16 @@
 <script lang="ts">
-	import type {EventHandler} from 'svelte/elements'
-
-	import {goto} from '$app/navigation'
 	import Button from '$lib/components/Button.svelte'
 	import GitHubIcon from '$lib/icons/github.svg?component'
 	import Spinner from '$lib/icons/spinner.svg?component'
+	import {enhance} from '$app/forms'
 
 	export let data
 
 	let loginOrSignup: 'login' | 'signup' = 'login'
 
 	let formState: 'idle' | 'submitting' | 'done' | Error = 'idle'
+
+	let email = ''
 	let confirmationEmail: string | null = null
 
 	async function signInWithGitHub() {
@@ -18,6 +18,9 @@
 
 		const signInResponse = await data.supabase.auth.signInWithOAuth({
 			provider: 'github',
+			options: {
+				redirectTo: data.callbackUrl,
+			},
 		})
 
 		if (signInResponse.error) {
@@ -25,87 +28,6 @@
 			return
 		} else {
 			formState = 'done'
-		}
-	}
-
-	async function signInWithMagicLink(email: string) {
-		formState = 'submitting'
-
-		const signInResponse = await data.supabase.auth.signInWithOtp({
-			email,
-		})
-
-		if (signInResponse.error) {
-			formState = signInResponse.error
-			return
-		} else {
-			formState = 'done'
-			confirmationEmail = email
-		}
-	}
-
-	async function signInWithEmail({
-		email,
-		password,
-	}: {
-		email: string
-		password: string
-	}) {
-		formState = 'submitting'
-
-		const signInResponse = await data.supabase.auth.signInWithPassword({
-			email,
-			password,
-		})
-
-		if (signInResponse.error) {
-			formState = signInResponse.error
-			return
-		} else {
-			formState = 'done'
-			goto('/profile')
-		}
-	}
-
-	async function signUpWithEmail({
-		email,
-		password,
-	}: {
-		email: string
-		password: string
-	}) {
-		formState = 'submitting'
-
-		const signUpResponse = await data.supabase.auth.signUp({
-			email,
-			password,
-		})
-
-		if (signUpResponse.error) {
-			formState = signUpResponse.error
-			return
-		} else {
-			formState = 'done'
-			confirmationEmail = email
-		}
-	}
-
-	const handleSubmit: EventHandler<SubmitEvent, HTMLFormElement> = async (
-		event,
-	) => {
-		const form = event.currentTarget
-		const submitter = event.submitter as HTMLButtonElement | undefined
-		const formData = new FormData(form)
-
-		const email = formData.get('email')
-		if (typeof email !== 'string' || !submitter) return
-
-		if (submitter.value === '🪄') {
-			signInWithMagicLink(email)
-		} else {
-			const password = formData.get('password')
-			if (typeof password !== 'string') return
-			signInWithEmail({email, password})
 		}
 	}
 </script>
@@ -129,7 +51,31 @@
 		{#if loginOrSignup === 'login'}
 			<form
 				class="flex w-full flex-col gap-2"
-				on:submit|preventDefault={handleSubmit}
+				method="POST"
+				action="?/magic"
+				use:enhance={() => {
+					formState = 'submitting'
+					confirmationEmail = email
+
+					return async ({result, update}) => {
+						if (result.type === 'failure') {
+							const message =
+								typeof result.data?.message === 'string'
+									? result.data?.message
+									: `There was a problem sending a magic link to ${confirmationEmail}...`
+							formState = new Error(message)
+						}
+
+						if (result.type === 'success') {
+							formState = 'done'
+							if (typeof result.data?.email === 'string') {
+								confirmationEmail = result.data.email
+							}
+						}
+
+						await update()
+					}
+				}}
 			>
 				<input
 					class="rounded bg-surface-2 text-copy-base placeholder:font-light placeholder:text-copy-muted focus:border-primary-500 focus:outline-none focus:ring-1 focus:ring-primary-500"
@@ -139,10 +85,32 @@
 					autocomplete="email"
 					required
 					aria-label="email"
+					bind:value={email}
 				/>
 				<Button value="🪄" disabled={formState === 'submitting'}>
 					<span>🪄</span><span>Login with magic link!</span>
 				</Button>
+			</form>
+			<form
+				class="flex w-full flex-col gap-2"
+				method="POST"
+				action="?/email"
+				use:enhance={() => {
+					formState = 'submitting'
+
+					return async ({result, update}) => {
+						if (result.type === 'failure') {
+							const message =
+								typeof result.data?.message === 'string'
+									? result.data?.message
+									: 'There was a problem logging you in with Email & Password...'
+							formState = new Error(message)
+						}
+						await update()
+					}
+				}}
+			>
+				<input type="hidden" name="email" bind:value={email} />
 				<input
 					class="rounded bg-surface-2 text-copy-base placeholder:font-light placeholder:text-copy-muted focus:border-primary-500 focus:outline-none focus:ring-1 focus:ring-primary-500"
 					type="password"
@@ -150,6 +118,7 @@
 					placeholder="password"
 					aria-label="password"
 					minlength="12"
+					required
 				/>
 				<Button disabled={formState === 'submitting'}>
 					<span>💌</span><span>Login with email + password</span>
@@ -168,16 +137,28 @@
 		{:else}
 			<form
 				class="flex w-full flex-col gap-2"
-				on:submit|preventDefault={(event) => {
-					const form = event.currentTarget
-					const formData = new FormData(form)
+				method="POST"
+				action="?/signUp"
+				use:enhance={() => {
+					formState = 'submitting'
+					confirmationEmail = email
 
-					const email = formData.get('email')
-					const password = formData.get('password')
-
-					if (typeof email !== 'string' || typeof password !== 'string') return
-
-					signUpWithEmail({email, password})
+					return async ({result, update}) => {
+						if (result.type === 'failure') {
+							const message =
+								typeof result.data?.message === 'string'
+									? result.data?.message
+									: `There was a problem signing you up as ${confirmationEmail}...`
+							formState = new Error(message)
+						}
+						if (result.type === 'success') {
+							formState = 'done'
+							if (typeof result.data?.email === 'string') {
+								confirmationEmail = result.data.email
+							}
+						}
+						await update()
+					}
 				}}
 			>
 				<input
@@ -217,7 +198,7 @@
 				</button>
 			</form>
 		{/if}
-		{#if confirmationEmail}
+		{#if formState === 'done' && confirmationEmail}
 			<div>
 				💌 Please check your email: <strong>{confirmationEmail}</strong> 💌
 			</div>

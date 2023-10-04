@@ -45,9 +45,13 @@ export const actions: Actions = {
 		})
 
 		if (!portalSession.url) {
-			throw Error('could not create portal session with Stripe')
+			throw new Error('could not create portal session with Stripe')
 		}
 
 		throw redirect(303, portalSession.url)
+	},
+	signOut: async ({locals: {supabase}}) => {
+		await supabase.auth.signOut()
+		throw redirect(303, '/')
 	},
 }
