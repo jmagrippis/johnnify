@@ -1,20 +1,9 @@
 <script lang="ts">
-	import {goto} from '$app/navigation'
+	import {enhance} from '$app/forms'
 	import {transitionsEnabled} from '$lib/stores/transitionsEnabled'
 	import Toggle from '../Toggle.svelte'
 
 	export let data
-
-	async function signOut() {
-		const {error} = await data.supabase.auth.signOut()
-
-		if (error) {
-			console.error(error)
-			return
-		}
-
-		goto('/')
-	}
 
 	const understatedButtonClasses =
 		'underline decoration-emphasis hover:decoration-emphasis-hover'
@@ -71,6 +60,8 @@
 		</section>
 	{/if}
 	<section>
-		<button class={understatedButtonClasses} on:click={signOut}>logout</button>
+		<form method="POST" action="?/signOut" use:enhance>
+			<button class={understatedButtonClasses}> logout </button>
+		</form>
 	</section>
 </main>
