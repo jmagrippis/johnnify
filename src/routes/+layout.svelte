@@ -32,6 +32,8 @@
 	onMount(() => {
 		const documentTheme = document.documentElement.dataset.theme
 		$theme = isTheme(documentTheme) ? documentTheme : 'auto'
+
+		document.documentElement.removeAttribute('class')
 		const localStorageTransitionsEnabled =
 			localStorage.getItem('transitionsEnabled')
 
@@ -105,10 +107,12 @@
 	}
 
 	:root::view-transition-old(root) {
-		animation: 500ms ease-out both fade-out;
+		pointer-events: none;
+		animation: 300ms ease-out both fade-out;
 	}
 
 	:root::view-transition-new(root) {
-		animation: 500ms ease-out both slide-from-right;
+		pointer-events: none;
+		animation: 300ms ease-out both slide-from-right;
 	}
 </style>
