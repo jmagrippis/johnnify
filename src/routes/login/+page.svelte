@@ -4,32 +4,12 @@
 	import Spinner from '$lib/icons/spinner.svg?component'
 	import {enhance} from '$app/forms'
 
-	export let data
-
 	let loginOrSignup: 'login' | 'signup' = 'login'
 
 	let formState: 'idle' | 'submitting' | 'done' | Error = 'idle'
 
 	let email = ''
 	let confirmationEmail: string | null = null
-
-	async function signInWithGitHub() {
-		formState = 'submitting'
-
-		const signInResponse = await data.supabase.auth.signInWithOAuth({
-			provider: 'github',
-			options: {
-				redirectTo: data.callbackUrl,
-			},
-		})
-
-		if (signInResponse.error) {
-			formState = signInResponse.error
-			return
-		} else {
-			formState = 'done'
-		}
-	}
 </script>
 
 <main class="container flex grow flex-col px-2">
@@ -38,11 +18,34 @@
 	<section
 		class="flex grow flex-col items-center justify-center gap-4 self-center"
 	>
-		<div>
-			<Button on:click={signInWithGitHub} disabled={formState === 'submitting'}>
+		<form
+			method="POST"
+			action="?/provider"
+			use:enhance={() => {
+				formState = 'submitting'
+
+				return async ({result, update}) => {
+					if (result.type === 'failure') {
+						const message =
+							typeof result.data?.message === 'string'
+								? result.data?.message
+								: `There was a problem logging you in with GitHub...`
+						formState = new Error(message)
+					}
+
+					if (result.type === 'success') {
+						formState = 'done'
+					}
+
+					await update()
+				}
+			}}
+		>
+			<input type="hidden" name="provider" value="github" />
+			<Button disabled={formState === 'submitting'}>
 				<GitHubIcon class="w-8" /><span class="grow">Login with GitHub</span>
 			</Button>
-		</div>
+		</form>
 		<div class="flex w-full items-center gap-4">
 			<span class="inline-block h-[1px] w-full bg-copy-base" />
 			<span class="shrink-0">or with email</span>

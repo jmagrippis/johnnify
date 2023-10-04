@@ -2,7 +2,7 @@ import {fail, redirect} from '@sveltejs/kit'
 import {AuthApiError} from '@supabase/supabase-js'
 import type {PageServerLoad} from './$types'
 
-export const load: PageServerLoad = async ({url, locals: {getSession}}) => {
+export const load: PageServerLoad = async ({locals: {getSession}}) => {
 	const session = await getSession()
 
 	// if the user is already logged in return them to their profile page
@@ -11,7 +11,6 @@ export const load: PageServerLoad = async ({url, locals: {getSession}}) => {
 	}
 
 	return {
-		callbackUrl: `${url.origin}/auth/callback`,
 		meta: {
 			title: 'Login',
 			description:
@@ -129,5 +128,35 @@ export const actions = {
 		}
 
 		return {email}
+	},
+
+	provider: async ({request, url, locals: {supabase}}) => {
+		const formData = await request.formData()
+
+		const provider = formData.get('provider')
+
+		if (typeof provider !== 'string') {
+			return fail(400, {
+				error: 'Missing provider',
+			})
+		}
+
+		const redirectTo = `${url.origin}/auth/callback`
+
+		const {data, error} = await supabase.auth.signInWithOAuth({
+			provider: 'github',
+			options: {redirectTo},
+		})
+
+		if (error || !data.url) {
+			return fail(500, {
+				message:
+					error?.message ??
+					`We had a problem logging you in with ${provider}! Try again?`,
+				provider,
+			})
+		}
+
+		throw redirect(303, data.url)
 	},
 }
