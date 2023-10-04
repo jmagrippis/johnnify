@@ -3,13 +3,19 @@
 	import GitHubIcon from '$lib/icons/github.svg?component'
 	import Spinner from '$lib/icons/spinner.svg?component'
 	import {enhance} from '$app/forms'
+	import type {Snapshot} from './$types'
 
 	let loginOrSignup: 'login' | 'signup' = 'login'
 
 	let formState: 'idle' | 'submitting' | 'done' | Error = 'idle'
 
-	let email = ''
+	let email: string
 	let confirmationEmail: string | null = null
+
+	export const snapshot: Snapshot = {
+		capture: () => email,
+		restore: (value) => (email = value),
+	}
 </script>
 
 <main class="container flex grow flex-col px-2">
@@ -113,7 +119,7 @@
 					}
 				}}
 			>
-				<input type="hidden" name="email" bind:value={email} />
+				<input type="hidden" name="email" bind:value={email} required />
 				<input
 					class="rounded bg-surface-2 text-copy-base placeholder:font-light placeholder:text-copy-muted focus:border-primary-500 focus:outline-none focus:ring-1 focus:ring-primary-500"
 					type="password"
@@ -172,6 +178,7 @@
 					autocomplete="email"
 					required
 					aria-label="email"
+					bind:value={email}
 				/>
 				<input
 					class="rounded bg-surface-2 text-copy-base placeholder:font-light placeholder:text-copy-muted focus:border-primary-500 focus:outline-none focus:ring-1 focus:ring-primary-500"
