@@ -96,7 +96,7 @@
 					aria-label="email"
 					bind:value={email}
 				/>
-				<Button value="🪄" disabled={formState === 'submitting'}>
+				<Button disabled={formState === 'submitting'}>
 					<span>🪄</span><span>Login with magic link!</span>
 				</Button>
 			</form>
@@ -218,6 +218,48 @@
 		{/if}
 		{#if formState instanceof Error}
 			<strong>🚨 {formState.message} 🚨</strong>
+			{#if formState.message.includes('Invalid credentials')}
+				<div>
+					<p>
+						You may want to double-check your email & password, or try logging
+						in with a magic link instead!
+					</p>
+					<form
+						method="POST"
+						action="?/reset"
+						use:enhance={() => {
+							formState = 'submitting'
+
+							return async ({result, update}) => {
+								if (result.type === 'failure') {
+									const message =
+										typeof result.data?.message === 'string'
+											? result.data?.message
+											: `There was a problem sending a password reset email to ${confirmationEmail}...`
+									formState = new Error(message)
+								}
+
+								if (result.type === 'success') {
+									formState = 'done'
+									if (typeof result.data?.email === 'string') {
+										confirmationEmail = result.data.email
+									}
+								}
+
+								await update()
+							}
+						}}
+					>
+						<input type="hidden" name="email" bind:value={email} required />
+						<p>
+							You may also <button
+								class="underline decoration-emphasis hover:decoration-emphasis-hover"
+								>reset your password</button
+							>.
+						</p>
+					</form>
+				</div>
+			{/if}
 		{/if}
 	</section>
 </main>

@@ -40,7 +40,7 @@ export const actions = {
 		if (error) {
 			if (error.status === 400) {
 				return fail(400, {
-					message: 'Invalid credentials',
+					message: 'Invalid credentials!',
 					values: {email},
 				})
 			}
@@ -158,5 +158,33 @@ export const actions = {
 		}
 
 		throw redirect(303, data.url)
+	},
+
+	reset: async ({request, url, locals: {supabase}}) => {
+		const formData = await request.formData()
+
+		const email = formData.get('email')
+
+		if (typeof email !== 'string') {
+			return fail(400, {
+				error: 'Missing email',
+			})
+		}
+
+		const redirectTo = `${url.origin}/auth/change-password`
+		const {error} = await supabase.auth.resetPasswordForEmail(email, {
+			redirectTo,
+		})
+
+		if (error) {
+			return fail(500, {
+				message:
+					error.message ??
+					`We had a problem sending a reset email to ${email}... Try again?`,
+				email,
+			})
+		}
+
+		return {email}
 	},
 }
