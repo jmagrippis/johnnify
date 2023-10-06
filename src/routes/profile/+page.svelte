@@ -53,15 +53,18 @@
 			{:else}
 				<form method="POST" action="?/customerPortalSession">
 					<button class={understatedButtonClasses}
-						>Manage your billing details or cancel</button
+						>💸 Manage your billing details or cancel</button
 					>
 				</form>
 			{/if}
 		</section>
 	{/if}
 	<section>
+		<a href="/auth/change-password">🔐 Set / change your password</a>
+	</section>
+	<section>
 		<form method="POST" action="?/signOut" use:enhance>
-			<button class={understatedButtonClasses}> logout </button>
+			<button class={understatedButtonClasses}>🫥 Logout </button>
 		</form>
 	</section>
 </main>

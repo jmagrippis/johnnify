@@ -30,8 +30,8 @@
 		}}
 	>
 		<p class="text-lg">
-			This is your chance to your password. Passwords need to be at least 12
-			characters long, otherwise you just need to make it memorable!
+			This is your chance to change your password. Passwords need to be at least
+			12 characters long, otherwise you just need to make it memorable!
 		</p>
 		<input
 			class="rounded bg-surface-2 text-copy-base placeholder:font-light placeholder:text-copy-muted focus:border-primary-500 focus:outline-none focus:ring-1 focus:ring-primary-500"
