@@ -2,7 +2,7 @@ import {error, redirect} from '@sveltejs/kit'
 
 export const GET = async ({url, locals: {supabase}}) => {
 	const code = url.searchParams.get('code')
-	const next = url.searchParams.get('next') ?? '/'
+	const next = url.searchParams.get('next') ?? '/profile'
 
 	if (typeof code !== 'string' || typeof next !== 'string') {
 		throw error(400, 'Invalid parameters given')
