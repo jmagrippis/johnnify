@@ -1,4 +1,4 @@
-import {expect, it} from 'vitest'
+import {expect, it} from 'bun:test'
 import {deriveDevice} from './deriveDevice'
 
 it('classifies desktop Chrome User Agent as "other"', () => {
