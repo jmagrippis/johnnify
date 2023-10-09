@@ -15,7 +15,7 @@ const isEmailOtpType = (type: string): type is EmailOtpType =>
 export const GET = async ({url, locals: {supabase}}) => {
 	const token_hash = url.searchParams.get('token_hash')
 	const type = url.searchParams.get('type')
-	const next = url.searchParams.get('next') ?? '/'
+	const next = url.searchParams.get('next') ?? '/profile'
 
 	if (
 		typeof token_hash !== 'string' ||

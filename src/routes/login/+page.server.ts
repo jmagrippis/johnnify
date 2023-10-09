@@ -20,7 +20,7 @@ export const load: PageServerLoad = async ({locals: {getSession}}) => {
 }
 
 export const actions = {
-	email: async ({request, locals: {supabase}}) => {
+	password: async ({request, locals: {supabase}}) => {
 		const formData = await request.formData()
 
 		const email = formData.get('email')
@@ -70,7 +70,7 @@ export const actions = {
 			email,
 			password,
 			options: {
-				emailRedirectTo: `${url.origin}/auth/callback`,
+				emailRedirectTo: `${url.origin}/profile`,
 			},
 		})
 
@@ -93,7 +93,7 @@ export const actions = {
 		return {email}
 	},
 
-	magic: async ({request, locals: {supabase}}) => {
+	magic: async ({request, url, locals: {supabase}}) => {
 		const formData = await request.formData()
 
 		const email = formData.get('email')
@@ -104,7 +104,12 @@ export const actions = {
 			})
 		}
 
-		const {error} = await supabase.auth.signInWithOtp({email})
+		const emailRedirectTo = `${url.origin}/auth/confirm`
+
+		const {error} = await supabase.auth.signInWithOtp({
+			email,
+			options: {emailRedirectTo},
+		})
 
 		if (error) {
 			if (error instanceof AuthApiError && error.status === 400) {

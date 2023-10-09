@@ -103,7 +103,7 @@
 			<form
 				class="flex w-full flex-col gap-2"
 				method="POST"
-				action="?/email"
+				action="?/password"
 				use:enhance={() => {
 					formState = 'submitting'
 
