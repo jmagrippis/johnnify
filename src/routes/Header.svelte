@@ -36,6 +36,14 @@
 			<ul class="flex gap-4">
 				<li>
 					<a
+						href="/ask"
+						class={$page.url.pathname.startsWith('/ask')
+							? activePageClasses
+							: undefined}>ask</a
+					>
+				</li>
+				<li>
+					<a
 						href="/demos/text-gradients"
 						class={$page.url.pathname.startsWith('/demos')
 							? activePageClasses
