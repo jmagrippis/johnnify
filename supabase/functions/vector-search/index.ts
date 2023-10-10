@@ -2,8 +2,13 @@ import 'xhr'
 import {serve} from 'std/http/server.ts'
 import {createClient} from '@supabase/supabase-js'
 import {codeBlock, oneLine} from 'commmon-tags'
-import GPT3Tokenizer from 'gpt3-tokenizer'
-import {Configuration, CreateCompletionRequest, OpenAIApi} from 'openai'
+import {isWithinTokenLimit} from 'gpt-tokenizer'
+import {
+	ChatCompletionRequestMessageRoleEnum,
+	Configuration,
+	CreateChatCompletionRequest,
+	OpenAIApi,
+} from 'openai'
 import {ensureGetEnv} from '../_utils/env.ts'
 import {ApplicationError, UserError} from '../_utils/errors.ts'
 
@@ -80,35 +85,33 @@ serve(async (req) => {
 			throw new ApplicationError('Failed to match page sections', matchError)
 		}
 
-		const tokenizer = new GPT3Tokenizer({type: 'gpt3'})
-		let tokenCount = 0
+		const TOKEN_LIMIT = 1_500
 		let contextText = ''
 
 		for (const pageSection of pageSections) {
 			const content = pageSection.content
-			const encoded = tokenizer.encode(content)
-			tokenCount += encoded.text.length
 
-			if (tokenCount >= 1500) {
+			const nextContextText = contextText + `${content.trim()}\n---\n`
+			if (!isWithinTokenLimit(nextContextText, TOKEN_LIMIT)) {
 				break
 			}
 
-			contextText += `${content.trim()}\n---\n`
+			contextText += nextContextText
 		}
 
 		const messages = [
 			{
-				role: 'system',
+				role: ChatCompletionRequestMessageRoleEnum.System,
 				content: codeBlock`
       ${oneLine`
-        You are the personal assistant of Johnny Magrippis.
+        You are the helpful assistant Johnnybot, representing Johnny Magrippis.
         Johnny is a Principal Software Engineer and educational YouTuber.
         Johnny is known for his positive personality, smiley face and ability to explain things concisely!
         Johnny codes around the world, and inspires others to do the same!
         Johnny loves coding, video games, beach volleyball and "dad jokes".
         You have watched all of Johnny's videos, and love to help other viewers.
         Given the following sections of transcripts from Johnny's videos,
-        answer the question based mostly only on that information.
+        answer user questions based mostly on that information.
       `}
 
       Context sections:
@@ -117,10 +120,13 @@ serve(async (req) => {
       Please answer in markdown, including related code snippets if available.
     `,
 			},
-			{role: 'user', content: sanitizedQuery},
+			{
+				role: ChatCompletionRequestMessageRoleEnum.User,
+				content: sanitizedQuery,
+			},
 		]
 
-		const completionOptions: CreateCompletionRequest = {
+		const completionOptions: CreateChatCompletionRequest = {
 			model: 'gpt-4',
 			messages,
 			max_tokens: 512,
