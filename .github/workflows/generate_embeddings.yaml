@@ -1,0 +1,17 @@
+name: Generate Embeddings
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: supabase/embeddings-generator@v0.0.5
+        with:
+          supabase-url: ${{ vars.PUBLIC_SUPABASE_URL }}
+          supabase-service-role-key: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          openai-key: ${{ secrets.OPENAI_KEY }}
+          docs-root-path: 'src/lib/docs/transcripts'

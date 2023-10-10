@@ -7,6 +7,8 @@ githubUrl: https://github.com/jmagrippis/vitest-with-sveltekit
 publishedAt: May 11, 2022
 ---
 
+# TDD SvelteKit 🧪 with Vitest
+
 Hello and welcome, I’m Johnny and you want to test your SvelteKit app with Vitest!
 
 The most popular framework to test Javascript... JEST, and I love Jest, but its biggest drawback is that we have to configure it separately in order for it to understand the files we’re testing.
