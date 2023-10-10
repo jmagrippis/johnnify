@@ -70,7 +70,7 @@ export const actions = {
 			email,
 			password,
 			options: {
-				emailRedirectTo: `${url.origin}/profile`,
+				emailRedirectTo: `${url.origin}/auth/confirm`,
 			},
 		})
 

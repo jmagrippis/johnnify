@@ -7,6 +7,8 @@ githubUrl: https://github.com/jmagrippis/johnnify
 publishedAt: Sep 17, 2023
 ---
 
+# “App-like feel” 😍 with the View Transitions API & SvelteKit!
+
 Hello and welcome, I’m Johnny and YOU want to give your website that elusive app-like feel, and I’ll show you how, with SvelteKit and the brand new, experimental, View Transitions API.
 
 Web developers have been chasing the “app-like” feel for decades. Since the iPhone came out and mobile apps started becoming parts of our lives! They felt fast, they felt slick, they felt totally unlike your average web experience.

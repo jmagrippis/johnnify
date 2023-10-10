@@ -7,6 +7,8 @@ githubUrl: https://github.com/jmagrippis/hello-there
 publishedAt: Apr 17, 2023
 ---
 
+# ChatGPT-4 with SvelteKit 🤖 Generative AI on the EDGE 🌍
+
 Hello and welcome, I’m Johnny and **you** wanna integrate with the hottest of hot tech. You want to work with generative AI, so, today, we’re gonna use ChatGPT-4 with SvelteKit.
 
 On my livestreams, we’ve been building an app which picks a random emoji every day, then “asks” a famous fictional character for a quote! Users may ask characters for content creation advice as well, you can ask Geralt how they’d make a TikTok about Guide Dog 🦮, ask Spider-Man how they’d make a Video Game about 🚕.

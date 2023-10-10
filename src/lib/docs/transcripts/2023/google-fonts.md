@@ -7,6 +7,8 @@ githubUrl: https://github.com/jmagrippis/johnnify
 publishedAt: Sep 26, 2023
 ---
 
+# Stop using Google Fonts in prod 📈 what to do instead! 📉
+
 Google Fonts is AWESOME!
 
 You can browse through thousands of font families, filter on supported languages, the style… you can preview your own copy…

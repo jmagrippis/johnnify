@@ -7,6 +7,8 @@ githubUrl: https://github.com/jmagrippis/johnnify
 publishedAt: Sep 5, 2023
 ---
 
+# Text Gradient with vanilla CSS 🍦, or with Tailwind! ⛵️ (for your stylish hero sections)
+
 Hello and welcome, I’m Johnny and YOU want stylish colourful text for your hero sections!
 
 Gradient text has been trending massively! You can go really subtle, or REALLY loud, so let’s learn how it works and the world is your oyster!
