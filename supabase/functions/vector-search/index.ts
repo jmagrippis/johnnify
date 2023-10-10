@@ -96,41 +96,40 @@ serve(async (req) => {
 			contextText += `${content.trim()}\n---\n`
 		}
 
-		const prompt = codeBlock`
+		const messages = [
+			{
+				role: 'system',
+				content: codeBlock`
       ${oneLine`
-        You are the very enthusiastic personal assistant of Johnny Magrippis.
+        You are the personal assistant of Johnny Magrippis.
         Johnny is a Principal Software Engineer and educational YouTuber.
         Johnny is known for his positive personality, smiley face and ability to explain things concisely!
         Johnny codes around the world, and inspires others to do the same!
         Johnny loves coding, video games, beach volleyball and "dad jokes".
         You have watched all of Johnny's videos, and love to help other viewers.
         Given the following sections of transcripts from Johnny's videos,
-        answer the question using only that information,
-        outputted in markdown format. If you are unsure and the answer
-        is not explicitly written in the documentation, say
-        "Sorry, I don't know how to help with that."
+        answer the question based mostly only on that information.
       `}
 
       Context sections:
       ${contextText}
 
-      Question: """
-      ${sanitizedQuery}
-      """
-
-      Answer as markdown (including related code snippets if available):
-    `
+      Please answer in markdown, including related code snippets if available.
+    `,
+			},
+			{role: 'user', content: sanitizedQuery},
+		]
 
 		const completionOptions: CreateCompletionRequest = {
-			model: 'text-davinci-003',
-			prompt,
+			model: 'gpt-4',
+			messages,
 			max_tokens: 512,
 			temperature: 0,
 			stream: true,
 		}
 
 		// The Fetch API allows for easier response streaming over the OpenAI client.
-		const response = await fetch('https://api.openai.com/v1/completions', {
+		const response = await fetch('https://api.openai.com/v1/chat/completions', {
 			headers: {
 				Authorization: `Bearer ${OPENAI_KEY}`,
 				'Content-Type': 'application/json',
