@@ -8,7 +8,7 @@ jobs:
   generate:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: supabase/embeddings-generator@v0.0.5
         with:
           supabase-url: ${{ vars.PUBLIC_SUPABASE_URL }}
