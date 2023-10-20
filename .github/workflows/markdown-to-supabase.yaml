@@ -1,15 +1,15 @@
 name: 'Sync Markdown with Supabase'
-on: # run only on main branch changes
+
+on:
   push:
-    branches:
-      - main
+    branches: [main]
 
 jobs:
-  generate:
+  sync-md-with-supabase:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: jmagrippis/markdown-to-supabase@v0.1.1
+      - uses: jmagrippis/markdown-to-supabase@v0.1.6
         with:
           supabase-url: ${{ vars.PUBLIC_SUPABASE_URL }}
           supabase-service-role-key: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
