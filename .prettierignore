@@ -1,15 +1,9 @@
-.DS_Store
-node_modules
-/build
-/.vercel
-/.svelte-kit
-/package
-.env
-.env.*
-!.env.example
+# ignore supabase internal auto-generated files
 supabase/.temp
+supabase/.branches
 
-# Ignore files for PNPM, NPM and YARN
+# Ignore package manager lockfiles
 pnpm-lock.yaml
 package-lock.json
 yarn.lock
+bun.lockb
