@@ -7,6 +7,8 @@ githubUrl: https://github.com/jmagrippis/moving-scapes
 publishedAt: Mar 6, 2023
 ---
 
+# HTML Video Backgrounds 🎥 (featuring SvelteKit & Tailwind)
+
 Hello and welcome, I’m Johnny and you want an eye-catching video in the background of your website. Everyone wants something cool for their HERO section, and putting a chill video there has been popular for a few years now.
 
 The latest trend is probably animations that give a stylised, romanticised look at using the product, but I still get clients asking explicitly for video backgrounds… which makes sense, we are in the age of social media after all.
