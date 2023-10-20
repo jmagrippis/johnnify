@@ -1,0 +1,17 @@
+name: 'Sync Markdown with Supabase'
+on: # run only on main branch changes
+  push:
+    branches:
+      - main
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: jmagrippis/markdown-to-supabase@v0.1.0 # Find the latest version in the Marketplace
+        with:
+          supabase-url: ${{ vars.PUBLIC_SUPABASE_URL }}
+          supabase-service-role-key: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          docs-root-path: 'docs/videos'
+          target-table: 'videos'
