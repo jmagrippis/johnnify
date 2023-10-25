@@ -1,6 +1,6 @@
 import {writable} from 'svelte/store'
 
-const themes = ['light', 'dark', 'auto'] as const
+const themes = ['light', 'dark'] as const
 export type Theme = (typeof themes)[number]
 
 export const isTheme = (theme: unknown): theme is Theme =>

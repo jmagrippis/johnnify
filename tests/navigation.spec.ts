@@ -16,6 +16,13 @@ test('navigation smoke test', async ({page}) => {
 		page.getByRole('heading', {name: 'Ask & learn', level: 1}),
 	).toBeVisible()
 
+	// navigate to the Videos Page
+	await page.getByRole('link', {name: 'videos'}).click()
+	await expect(page).toHaveTitle(/Latest Videos/)
+	await expect(
+		page.getByRole('heading', {name: 'Latest Videos', level: 1}),
+	).toBeVisible()
+
 	// navigate to the Demos Page
 	await page.getByRole('link', {name: 'demos'}).click()
 	await expect(page).toHaveTitle(/Text Gradients/)

@@ -22,3 +22,4 @@ It's also used in short video guides, such as:
 - Storage & Auth: [Supabase](https://supabase.com/)
 - Deployment: [Vercel](https://vercel.com/)
 - Package manager+: [Bun](https://bun.sh/)
+- Browser tests: [Playwright](https://playwright.dev/)

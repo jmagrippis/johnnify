@@ -280,6 +280,20 @@ export interface Database {
 				}
 				Returns: unknown
 			}
+			json_matches_schema: {
+				Args: {
+					schema: Json
+					instance: Json
+				}
+				Returns: boolean
+			}
+			jsonb_matches_schema: {
+				Args: {
+					schema: Json
+					instance: Json
+				}
+				Returns: boolean
+			}
 			vector_avg: {
 				Args: {
 					'': number[]

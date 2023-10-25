@@ -26,6 +26,7 @@ jobs:
           PUBLIC_STRIPE_KEY: ${{ vars.PUBLIC_STRIPE_KEY }}
           STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
           STRIPE_WEBHOOK_SECRET: ${{ secrets.STRIPE_WEBHOOK_SECRET }}
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
       - name: Install Playwright Browsers
         run: bunx playwright install --with-deps
       - name: Run Playwright tests

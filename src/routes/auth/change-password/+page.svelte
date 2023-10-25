@@ -1,13 +1,14 @@
 <script lang="ts">
 	import {enhance} from '$app/forms'
 	import Button from '$lib/components/Button.svelte'
+	import PageTitle from '$lib/components/PageTitle.svelte'
 	import Spinner from '$lib/icons/spinner.svg?component'
 
 	let formState: 'idle' | 'submitting' | 'done' | Error = 'idle'
 </script>
 
 <main class="container max-w-prose grow px-2 text-lg">
-	<h1 class="mb-2 text-4xl">Change your password</h1>
+	<PageTitle>Change your password</PageTitle>
 	<form
 		class="flex w-full flex-col gap-4"
 		method="POST"
