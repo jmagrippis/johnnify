@@ -2,6 +2,7 @@
 	import Button from '$lib/components/Button.svelte'
 	import GitHubIcon from '$lib/icons/github.svg?component'
 	import Spinner from '$lib/icons/spinner.svg?component'
+	import PageTitle from '$lib/components/PageTitle.svelte'
 	import {enhance} from '$app/forms'
 	import type {Snapshot} from './$types'
 
@@ -19,11 +20,10 @@
 </script>
 
 <main class="container flex grow flex-col px-2">
-	<h1 class="text-4xl">Login or Signup!</h1>
-
 	<section
 		class="flex grow flex-col items-center justify-center gap-4 self-center"
 	>
+		<PageTitle>Login or Signup!</PageTitle>
 		<form
 			method="POST"
 			action="?/provider"

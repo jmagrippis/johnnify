@@ -31,7 +31,9 @@
 
 	onMount(() => {
 		const documentTheme = document.documentElement.dataset.theme
-		$theme = isTheme(documentTheme) ? documentTheme : 'auto'
+		if (isTheme(documentTheme)) {
+			$theme = documentTheme
+		}
 
 		document.documentElement.removeAttribute('class')
 		const localStorageTransitionsEnabled =

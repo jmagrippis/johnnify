@@ -1,16 +1,11 @@
 <script lang="ts">
-	import MarkdownIt from 'markdown-it'
+	import {micromark} from 'micromark'
 	import type {EventHandler} from 'svelte/elements'
 
 	import {PUBLIC_SUPABASE_URL} from '$env/static/public'
 	import Button from '$lib/components/Button.svelte'
 	import Spinner from '$lib/icons/spinner.svg?component'
-
-	const md = new MarkdownIt({
-		html: true,
-		linkify: true,
-		typographer: true,
-	})
+	import PageTitle from '$lib/components/PageTitle.svelte'
 
 	let formState: 'idle' | 'submitting' | 'replying' | 'done' | Error = 'idle'
 
@@ -47,7 +42,7 @@
 
 			if (e.data === '[DONE]') {
 				eventSource.close()
-				answers[currentAnswerIndex] = md.render(answers[currentAnswerIndex])
+				answers[currentAnswerIndex] = micromark(answers[currentAnswerIndex])
 				formState = 'done'
 
 				return
@@ -63,8 +58,8 @@
 	}
 </script>
 
-<main class="container max-w-prose grow px-2 text-lg shadow-low">
-	<h1 class="mb-2 text-4xl">Ask & learn with Generative Q&A!</h1>
+<main class="container max-w-prose grow px-2 text-lg">
+	<PageTitle>Ask & learn with Generative Q&A!</PageTitle>
 	<p>Ask a chatbot trained on Johnny’s videos and guides!</p>
 
 	<p>
@@ -79,8 +74,8 @@
 					<p>{question}</p>
 				</div>
 			{/each}
-			{#each answers as answer}
-				{#if formState === 'submitting'}
+			{#each answers as answer, i}
+				{#if i === answers.length - 1 && formState === 'submitting'}
 					<Spinner class="w-12 self-center text-emphasis" />
 				{:else}
 					<div

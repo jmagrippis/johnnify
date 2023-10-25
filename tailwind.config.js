@@ -5,6 +5,7 @@ const withAlphaValue = (varName) => `hsl(var(--${varName}) / <alpha-value>)`
 /** @type {import('tailwindcss').Config} */
 module.exports = {
 	content: ['./src/**/*.{html,js,ts,svelte}'],
+	darkMode: ['class', '[data-theme="dark"]'],
 	theme: {
 		colors: {
 			primary: colors.purple,
@@ -41,5 +42,5 @@ module.exports = {
 		},
 		extend: {},
 	},
-	plugins: [require('@tailwindcss/forms')],
+	plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography')],
 }

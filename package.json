@@ -11,7 +11,9 @@
 		"test:e2e": "playwright test",
 		"lint": "prettier --check . && eslint .",
 		"format": "prettier --write .",
-		"generate": "supabase gen types typescript --local > src/lib/generated/DatabaseDefinitions.ts && prettier --write ./src/lib/generated"
+		"generate:supabase": "supabase gen types typescript --local > src/lib/generated/DatabaseDefinitions.ts",
+		"generate:json2ts": "json2ts -i 'json-schemas/**/*.json' -o src/lib/generated --format=false",
+		"generate": "bun run generate:supabase && bun run generate:json2ts && prettier --write ./src/lib/generated"
 	},
 	"devDependencies": {
 		"@fontsource-variable/inconsolata": "^5.0.15",
@@ -23,6 +25,7 @@
 		"@sveltejs/adapter-vercel": "^3.0.3",
 		"@sveltejs/kit": "^1.27.0",
 		"@tailwindcss/forms": "^0.5.6",
+		"@tailwindcss/typography": "^0.5.10",
 		"@types/markdown-it": "^13.0.5",
 		"@typescript-eslint/eslint-plugin": "^6.9.0",
 		"@typescript-eslint/parser": "^6.9.0",
@@ -31,7 +34,9 @@
 		"eslint": "^8.52.0",
 		"eslint-config-prettier": "^9.0.0",
 		"eslint-plugin-svelte": "^2.34.0",
+		"json-schema-to-typescript": "^13.1.1",
 		"markdown-it": "^13.0.2",
+		"micromark": "^4.0.0",
 		"postcss": "^8.4.31",
 		"prettier": "^3.0.3",
 		"prettier-plugin-svelte": "^3.0.3",

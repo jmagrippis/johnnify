@@ -1,5 +1,6 @@
 <script lang="ts">
 	import {enhance} from '$app/forms'
+	import PageTitle from '$lib/components/PageTitle.svelte'
 	import {transitionsEnabled} from '$lib/stores/transitionsEnabled'
 	import Toggle from '../Toggle.svelte'
 
@@ -10,7 +11,7 @@
 </script>
 
 <main class="container max-w-prose grow px-2 text-lg">
-	<h1 class="text-4xl">Profile</h1>
+	<PageTitle>Profile</PageTitle>
 	<p>You are logged in as <strong>{data.session?.user.email}</strong></p>
 
 	<h2 class="text-2xl">Preferences</h2>

@@ -8,10 +8,10 @@
 
 	export let session: Session | null
 
-	const deriveNextTheme = (currentTheme: Theme | null): Theme => {
-		if (!browser) return currentTheme ?? 'auto'
+	const deriveNextTheme = (currentTheme: Theme | null): Theme | null => {
+		if (!browser) return null
 
-		if (!currentTheme || currentTheme === 'auto') {
+		if (!currentTheme) {
 			return window.matchMedia('(prefers-color-scheme: dark)').matches
 				? 'light'
 				: 'dark'
@@ -44,6 +44,14 @@
 				</li>
 				<li>
 					<a
+						href="/videos"
+						class={$page.url.pathname.startsWith('/videos')
+							? activePageClasses
+							: undefined}>videos</a
+					>
+				</li>
+				<li>
+					<a
 						href="/demos/text-gradients"
 						class={$page.url.pathname.startsWith('/demos')
 							? activePageClasses
@@ -63,7 +71,7 @@
 							href="/login"
 							class={$page.url.pathname === '/login'
 								? activePageClasses
-								: undefined}>login / signup</a
+								: undefined}>login</a
 						>
 					{/if}
 				</li>
