@@ -1,4 +1,4 @@
-import {micromark} from 'micromark'
+import {marked} from 'marked'
 import {error} from '@sveltejs/kit'
 
 import type {PageServerLoad} from './$types'
@@ -33,7 +33,7 @@ export const load: PageServerLoad = async ({params, locals: {supabase}}) => {
 		...data,
 		front_matter: data.front_matter as FrontMatter,
 		likes: details.statistics.likeCount,
-		content: micromark(body),
+		content: marked.parse(body),
 	}
 
 	return {
