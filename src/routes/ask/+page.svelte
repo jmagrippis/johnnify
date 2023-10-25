@@ -1,5 +1,5 @@
 <script lang="ts">
-	import {micromark} from 'micromark'
+	import {marked} from 'marked'
 	import type {EventHandler} from 'svelte/elements'
 
 	import {PUBLIC_SUPABASE_URL} from '$env/static/public'
@@ -42,7 +42,7 @@
 
 			if (e.data === '[DONE]') {
 				eventSource.close()
-				answers[currentAnswerIndex] = micromark(answers[currentAnswerIndex])
+				answers[currentAnswerIndex] = marked.parse(answers[currentAnswerIndex])
 				formState = 'done'
 
 				return
