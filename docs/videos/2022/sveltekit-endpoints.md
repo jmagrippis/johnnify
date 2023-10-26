@@ -1,6 +1,6 @@
 ---
-title: 🍞 & 🧈: Magically load data with SvelteKit Endpoints
-snippet: "Be great at the one combo I’ve never stopped being asked to do in my 20 years of Web & App development: Loading data & rendering it on-screen!"
+title: '🍞 & 🧈: Magically load data with SvelteKit Endpoints'
+snippet: 'Be great at the one combo I’ve never stopped being asked to do in my 20 years of Web & App development: Loading data & rendering it on-screen!'
 youtubeId: f6prqYlbTE4
 appUrl: https://techy.cat/
 githubUrl: https://github.com/jmagrippis/techy-cat

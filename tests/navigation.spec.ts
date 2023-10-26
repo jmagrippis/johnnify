@@ -18,10 +18,10 @@ test('navigation smoke test', async ({page}) => {
 
 	// navigate to the Videos Page
 	await page.getByRole('link', {name: 'videos'}).click()
-	await expect(page).toHaveTitle(/Latest Videos/)
 	await expect(
 		page.getByRole('heading', {name: 'Latest Videos', level: 1}),
 	).toBeVisible()
+	await expect(page).toHaveTitle(/Latest Videos/)
 
 	// navigate to the Demos Page
 	await page.getByRole('link', {name: 'demos'}).click()
