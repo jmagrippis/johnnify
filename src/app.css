@@ -56,11 +56,13 @@
 	}
 
 	/* css vars */
-	* {
+	:root {
 		--brand-hue: 271deg;
 		--emphasis-hue: 158deg;
 		--transition-duration-short: 0.15s;
 		--transition-duration-long: 0.4s;
+
+		--svelte-color: 15 100% 50%;
 
 		/* shadows */
 		--shadow-color: var(--brand-hue) 36% 60%;
@@ -125,9 +127,13 @@
 
 		--copy-base-color: var(--copy-base-color-light);
 		--copy-muted-color: var(--copy-muted-color-light);
+		--copy-contrast-color: var(--copy-base-color-dark);
+
 		--surface-1-color: var(--surface-1-color-light);
 		--surface-2-color: var(--surface-2-color-light);
 		--surface-3-color: var(--surface-3-color-light);
+		--surface-contrast-color: var(--surface-1-color-dark);
+
 		--emphasis-color: var(--emphasis-color-light);
 		--emphasis-hover-color: var(--emphasis-hover-color-light);
 	}
@@ -137,9 +143,13 @@
 
 		--copy-base-color: var(--copy-base-color-dark);
 		--copy-muted-color: var(--copy-muted-color-dark);
+		--copy-contrast-color: var(--copy-base-color-light);
+
 		--surface-1-color: var(--surface-1-color-dark);
 		--surface-2-color: var(--surface-2-color-dark);
 		--surface-3-color: var(--surface-3-color-dark);
+		--surface-contrast-color: var(--surface-1-color-light);
+
 		--emphasis-color: var(--emphasis-color-dark);
 		--emphasis-hover-color: var(--emphasis-hover-color-dark);
 	}
@@ -150,9 +160,13 @@
 
 			--copy-base-color: var(--copy-base-color-dark);
 			--copy-muted-color: var(--copy-muted-color-dark);
+			--copy-contrast-color: var(--copy-base-color-light);
+
 			--surface-1-color: var(--surface-1-color-dark);
 			--surface-2-color: var(--surface-2-color-dark);
 			--surface-3-color: var(--surface-3-color-dark);
+			--surface-contrast-color: var(--surface-1-color-light);
+
 			--shadow-1-color: var(--shadow-1-color-dark);
 			--emphasis-color: var(--emphasis-color-dark);
 			--emphasis-hover-color: var(--emphasis-hover-color-dark);
