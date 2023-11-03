@@ -35,6 +35,8 @@
 			$theme = documentTheme
 		}
 
+		// crucially removes the "pointer-events-none" class
+		// now that our app is hydrated
 		document.documentElement.removeAttribute('class')
 		const localStorageTransitionsEnabled =
 			localStorage.getItem('transitionsEnabled')

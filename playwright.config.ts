@@ -18,7 +18,7 @@ export default defineConfig({
 	/* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
 	use: {
 		/* Base URL to use in actions like `await page.goto('/')`. */
-		baseURL: 'http://localhost:4173',
+		baseURL: process.env.PUBLIC_ROOT_URL || 'http://localhost:5173',
 
 		launchOptions: {
 			slowMo: parseInt(process.env.SLOW_MO || '0'),
@@ -56,7 +56,7 @@ export default defineConfig({
 		// },
 		{
 			name: 'Mobile Safari',
-			use: {...devices['iPhone 12']},
+			use: {...devices['iPhone 14']},
 			dependencies: ['setup'],
 		},
 
@@ -72,9 +72,11 @@ export default defineConfig({
 	],
 
 	/* Run your local dev server before starting the tests */
-	webServer: {
-		command: 'bun run --bun preview',
-		port: 4173,
-		reuseExistingServer: !process.env.CI,
-	},
+	webServer: !process.env.CI
+		? {
+				command: 'bun run --bun dev',
+				port: 5173,
+				reuseExistingServer: true,
+		  }
+		: undefined,
 })
