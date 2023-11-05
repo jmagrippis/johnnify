@@ -31,7 +31,7 @@
 			rel="noopener noreferrer"
 			class="flex justify-end text-sm text-emphasis hover:text-emphasis-hover"
 		>
-			{data.video.likes}
+			{#await data.streamed.likes then likes}{likes}{/await}
 			❤️ over @
 			<YouTubeIcon class="ml-1 w-5" />
 			! Add yours? 🫶

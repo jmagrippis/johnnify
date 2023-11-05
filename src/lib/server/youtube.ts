@@ -8,12 +8,6 @@ export type YouTubeThumb = {
 
 export type YoutubeVideoItem = {
 	id: string
-	snippet: {
-		title: string
-		thumbnails: {
-			maxres: YouTubeThumb
-		}
-	}
 	statistics: {
 		viewCount: string
 		likeCount: string
@@ -26,7 +20,7 @@ export const fetchYouTubeDetails = async (
 	videoIds: string[],
 ): Promise<YoutubeVideoItem[]> => {
 	const url = new URL('https://youtube.googleapis.com/youtube/v3/videos')
-	url.searchParams.set('part', ['snippet', 'statistics'].join(','))
+	url.searchParams.set('part', ['statistics'].join(','))
 	url.searchParams.set('id', videoIds.join(','))
 	url.searchParams.set('key', YOUTUBE_API_KEY)
 	const response = await fetch(url, {
