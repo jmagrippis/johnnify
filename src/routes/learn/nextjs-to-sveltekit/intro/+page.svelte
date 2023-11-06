@@ -1,6 +1,8 @@
 <script lang="ts">
+	import Button from '$lib/components/Button.svelte'
 	import PageTitle from '$lib/components/PageTitle.svelte'
 	import YouTubeIcon from '$lib/icons/youtube.svg?component'
+	import ArrowForwardIcon from '$lib/icons/arrow-forward.svg?component'
 </script>
 
 <main class="grow text-center text-lg">
@@ -27,6 +29,10 @@
 				</a> to see me livestream development. We can work through and evolve it
 				together 🙌
 			</p>
+			<p>And if you want to see the skeleton chapters though...</p>
+			<Button tag="a" href="/learn/nextjs-to-sveltekit/1-getting-started"
+				>Onwards to Chapter 1! <ArrowForwardIcon class="w-7" /></Button
+			>
 		</div>
 	</section>
 </main>
