@@ -68,7 +68,7 @@
 		if (
 			$transitionsEnabled &&
 			document.startViewTransition &&
-			navigation.from?.route.id !== navigation.to?.route.id
+			navigation.from?.url.href !== navigation.to?.url.href
 		) {
 			return new Promise((resolve) => {
 				document.startViewTransition &&
