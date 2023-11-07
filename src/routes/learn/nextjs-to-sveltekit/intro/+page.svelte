@@ -29,7 +29,7 @@
 				</a> to see me livestream development. We can work through and evolve it
 				together 🙌
 			</p>
-			<p>And if you want to see the skeleton chapters though...</p>
+			<p class="mb-4">And if you want to see the skeleton chapters...</p>
 			<Button tag="a" href="/learn/nextjs-to-sveltekit/1-getting-started"
 				>Onwards to Chapter 1! <ArrowForwardIcon class="w-7" /></Button
 			>

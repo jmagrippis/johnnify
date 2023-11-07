@@ -7,7 +7,7 @@
 	export let data
 </script>
 
-<main class="px-2 pt-6">
+<main class="container flex flex-col items-center px-2 pt-6">
 	<section
 		class="prose-pre-code:surface-2 prose prose-lg prose-stone dark:prose-invert lg:prose-xl xl:prose-2xl prose-code:rounded-sm prose-pre:p-0"
 	>
