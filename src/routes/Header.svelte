@@ -29,8 +29,24 @@
 	<nav class="container flex justify-between px-2 py-4">
 		<a
 			href="/"
-			class={$page.url.pathname === '/' ? activePageClasses : undefined}
-			>Johnnify</a
+			class="decoration-none font-bold"
+			aria-label="Johnnify homepage"
+		>
+			<span
+				class={`inline-block sm:hidden ${
+					$page.url.pathname === '/'
+						? `underline decoration-emphasis decoration-2 ${activePageClasses}`
+						: ''
+				}`}>J</span
+			>
+
+			<span
+				class={`hidden sm:inline-block ${
+					$page.url.pathname === '/'
+						? `underline decoration-emphasis decoration-2 ${activePageClasses}`
+						: ''
+				}`}>Johnnify</span
+			></a
 		>
 		<div class="flex gap-4">
 			<ul class="flex gap-4">
@@ -40,6 +56,14 @@
 						class={$page.url.pathname.startsWith('/ask')
 							? activePageClasses
 							: undefined}>ask</a
+					>
+				</li>
+				<li>
+					<a
+						href="/learn/nextjs-to-sveltekit"
+						class={$page.url.pathname.startsWith('/learn')
+							? activePageClasses
+							: undefined}>learn</a
 					>
 				</li>
 				<li>
