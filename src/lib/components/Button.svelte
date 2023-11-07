@@ -2,6 +2,9 @@
 	export let disabled: boolean | undefined = undefined
 	export let tag: 'button' | 'a' = 'button'
 	export let href: string | undefined = undefined
+
+	export let className = ''
+	export {className as class}
 </script>
 
 <svelte:element
@@ -9,7 +12,7 @@
 	role={tag === 'button' ? 'button' : 'link'}
 	{href}
 	on:click
-	class="relative flex items-center justify-center gap-4 rounded bg-gradient-to-br from-primary-900 via-primary-600 to-secondary-400 px-4 py-2 text-2xl no-underline shadow-low transition-shadow hover:shadow-mid active:top-[-1px]"
+	class={`relative flex items-center justify-center gap-4 rounded bg-gradient-to-br from-primary-900 via-primary-600 to-secondary-400 px-4 py-2 text-2xl no-underline shadow-low transition-shadow hover:shadow-mid active:top-[-1px] ${className}`}
 	{disabled}
 >
 	<slot />

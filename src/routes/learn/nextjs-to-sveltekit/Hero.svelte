@@ -1,7 +1,8 @@
 <script lang="ts">
+	import {MoveRight} from 'lucide-svelte'
+
 	import Button from '$lib/components/Button.svelte'
 	import SvelteIcon from '$lib/icons/svelte.svg?component'
-	import ArrowForwardIcon from '$lib/icons/arrow-forward.svg?component'
 
 	export let chapterCount: number
 </script>
@@ -570,7 +571,7 @@
 				</div>
 				<div class="h-px w-full bg-surface-1"></div>
 				<Button tag="a" href="/learn/nextjs-to-sveltekit/intro"
-					>Start Learning <ArrowForwardIcon class="w-7" /></Button
+					>Start Learning <MoveRight /></Button
 				>
 			</div>
 		</div>
