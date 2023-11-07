@@ -127,7 +127,7 @@ serve(async (req) => {
 		]
 
 		const completionOptions: CreateChatCompletionRequest = {
-			model: 'gpt-4',
+			model: 'gpt-4-1106-preview',
 			messages,
 			max_tokens: 512,
 			temperature: 0,
