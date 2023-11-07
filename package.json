@@ -55,7 +55,8 @@
 	},
 	"trustedDependencies": [
 		"@sveltejs/kit",
-		"supabase"
+		"supabase",
+		"svelte-preprocess"
 	],
 	"type": "module",
 	"engines": {
