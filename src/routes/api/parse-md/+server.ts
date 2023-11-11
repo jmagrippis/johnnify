@@ -1,5 +1,5 @@
 import {json} from '@sveltejs/kit'
-import {mdParser} from '$lib/server/mdParser'
+import {getMdParser} from '$lib/server/mdParser'
 
 import type {RequestHandler} from './$types'
 
@@ -10,7 +10,8 @@ export const GET = (async ({url}) => {
 		return new Response('you need to provide some md to parse', {status: 400})
 	}
 
-	const html = await mdParser.process(md).then(String)
+	const mdParser = await getMdParser()
+	const html = await mdParser.parse(md)
 
 	return json({html})
 }) satisfies RequestHandler

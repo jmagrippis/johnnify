@@ -2,7 +2,7 @@ import {error} from '@sveltejs/kit'
 
 import type {PageServerLoad} from './$types'
 import {chapters, type Chapter} from './chapters'
-import {mdParser} from '$lib/server/mdParser'
+import {getMdParser} from '$lib/server/mdParser'
 
 export const load: PageServerLoad = async ({params: {slug}}) => {
 	const chapter = chapters.find((chapter) => chapter.slug === slug)
@@ -37,7 +37,9 @@ export const load: PageServerLoad = async ({params: {slug}}) => {
 
 	return {
 		stream: {
-			content: mdParser.process(chapter.content).then(String),
+			content: getMdParser().then((mdParser) =>
+				mdParser.parse(chapter.content),
+			),
 		},
 		title: chapter.front_matter.title,
 		prevChapter: prevChapter
