@@ -6,10 +6,8 @@
 	export let data
 </script>
 
-<main class="container flex flex-col items-center px-2 pt-6">
-	<section
-		class="prose prose-lg prose-stone dark:prose-invert lg:prose-xl xl:prose-2xl prose-pre:px-4 prose-pre:py-2"
-	>
+<main class="container flex grow flex-col items-center px-2 pt-6">
+	<section class="brand-prose">
 		<h1>
 			{data.title}
 		</h1>
@@ -22,7 +20,9 @@
 			</a>
 		{/if}
 		<div>
-			{@html data.content}
+			{#await data.stream.content then content}
+				{@html content}
+			{/await}
 		</div>
 	</section>
 	{#if data.nextChapter}

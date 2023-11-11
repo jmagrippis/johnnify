@@ -16,6 +16,16 @@ test('navigation smoke test', async ({page}) => {
 		page.getByRole('heading', {name: 'Ask & learn', level: 1}),
 	).toBeVisible()
 
+	// navigate to the Learn Page
+	await page.getByRole('link', {name: 'learn'}).click()
+	await expect(
+		page.getByRole('heading', {
+			name: 'Start building with SvelteKit',
+			level: 1,
+		}),
+	).toBeVisible()
+	await expect(page).toHaveTitle(/Learn SvelteKit/)
+
 	// navigate to the Videos Page
 	await page.getByRole('link', {name: 'videos'}).click()
 	await expect(
