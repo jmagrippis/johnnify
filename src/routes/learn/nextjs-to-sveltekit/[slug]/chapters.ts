@@ -1,7 +1,4 @@
 import matter from 'gray-matter'
-import {marked} from 'marked'
-import {markedSmartypants} from 'marked-smartypants'
-import {markedShiki} from './markedShiki'
 
 export type FrontMatter = {
 	title: string
@@ -15,9 +12,6 @@ export type Chapter = {
 	slug: string
 }
 
-marked.use(markedSmartypants())
-marked.use({renderer: markedShiki})
-
 const SLUG_REGEX = /\.\/chapters\/(.+)\.md/gm
 
 const rawChapters = import.meta.glob('./chapters/*.md', {
@@ -27,8 +21,7 @@ const rawChapters = import.meta.glob('./chapters/*.md', {
 
 export const chapters: Chapter[] = Object.entries(rawChapters).map(
 	([path, chapter]) => {
-		const {content: rawContent, data} = matter(chapter)
-		const content = marked.parse(rawContent)
+		const {content, data} = matter(chapter)
 
 		const [[, slug]] = [...path.matchAll(SLUG_REGEX)]
 		return {content, front_matter: data as FrontMatter, slug}

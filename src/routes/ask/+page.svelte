@@ -1,5 +1,4 @@
 <script lang="ts">
-	import {marked} from 'marked'
 	import type {EventHandler} from 'svelte/elements'
 
 	import {PUBLIC_SUPABASE_URL} from '$env/static/public'
@@ -37,12 +36,17 @@
 					: new Error('something went wrong getting you a response!')
 		})
 
-		eventSource.addEventListener('message', (e: MessageEvent) => {
+		eventSource.addEventListener('message', async (e: MessageEvent) => {
 			formState = 'replying'
 
 			if (e.data === '[DONE]') {
 				eventSource.close()
-				answers[currentAnswerIndex] = marked.parse(answers[currentAnswerIndex])
+				const url = new URL('/api/parse-md', window.location.origin)
+				url.searchParams.set('md', answers[currentAnswerIndex])
+				const parseMdResponse = await fetch(url)
+				if (parseMdResponse.ok) {
+					answers[currentAnswerIndex] = (await parseMdResponse.json()).html
+				}
 				formState = 'done'
 
 				return
@@ -79,7 +83,7 @@
 					<Spinner class="w-12 self-center text-emphasis" />
 				{:else}
 					<div
-						class="overflow-x-scroll rounded bg-secondary-800 px-4 py-2 text-xl text-white"
+						class="overflow-x-scroll break-words rounded bg-secondary-800 px-4 py-2 text-xl text-white"
 					>
 						{@html answer}
 					</div>

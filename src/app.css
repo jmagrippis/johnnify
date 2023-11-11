@@ -55,6 +55,10 @@
 		@apply transition-colors;
 	}
 
+	.brand-prose {
+		@apply prose prose-lg prose-stone dark:prose-invert lg:prose-xl xl:prose-2xl prose-pre:px-4 prose-pre:py-2;
+	}
+
 	/* css vars */
 	:root {
 		--brand-hue: 271deg;
