@@ -16,6 +16,7 @@
 	const onSubmit: EventHandler<SubmitEvent, HTMLFormElement> = (event) => {
 		let question = new FormData(event.currentTarget).get('question')
 		if (typeof question !== 'string') return
+		event.currentTarget.reset()
 
 		questions.push(question)
 
