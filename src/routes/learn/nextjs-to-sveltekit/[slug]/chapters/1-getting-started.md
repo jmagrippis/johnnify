@@ -1,6 +1,6 @@
 ---
-title: 'Chapter 1: Getting Started'
-description: 'Learn how to create a SvelteKit application and run your local development server.'
+title: 'Getting Started'
+description: 'Learn how to create a SvelteKit application and run your local development server'
 chapterNumber: 1
 ---
 

@@ -1,6 +1,6 @@
 ---
-title: 'Chapter 2: CSS Styling'
-description: 'Let’s create your home page and discuss the different ways you can style your application.'
+title: 'CSS Styling'
+description: 'Let’s create your home page and discuss the different ways you can style your application'
 chapterNumber: 2
 ---
 

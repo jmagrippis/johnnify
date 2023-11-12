@@ -1,5 +1,5 @@
 ---
-title: 'Chapter 4: Creating Layouts and Pages'
+title: 'Creating Layouts and Pages'
 description: 'Let’s create your dashboard routes using layouts and pages!'
 chapterNumber: 4
 ---
