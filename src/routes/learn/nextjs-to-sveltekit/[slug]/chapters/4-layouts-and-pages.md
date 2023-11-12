@@ -6,4 +6,4 @@ chapterNumber: 4
 
 ## Nested routing
 
-SvelteKit uses file-system routing where folders are used to create nested routes. Each folder represents a route segment that maps to a URL segment.
+Much like Next.js, SvelteKit uses file-system routing where how we've nested our directories in `src/routes` reflects the URLs our app will be responding to!
