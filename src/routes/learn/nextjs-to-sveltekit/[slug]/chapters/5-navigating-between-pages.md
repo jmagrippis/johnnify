@@ -1,5 +1,5 @@
 ---
-title: 'Chapter 5: Navigating Between Pages'
+title: 'Navigating Between Pages'
 description: 'Learn how to navigate between pages with an app-like feel, using the View Transitions API!'
 chapterNumber: 5
 ---

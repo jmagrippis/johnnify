@@ -42,6 +42,7 @@ export const load: PageServerLoad = async ({params: {slug}}) => {
 			),
 		},
 		title: chapter.front_matter.title,
+		chapterNumber: chapter.front_matter.chapterNumber,
 		prevChapter: prevChapter
 			? {
 					slug: prevChapter.slug,

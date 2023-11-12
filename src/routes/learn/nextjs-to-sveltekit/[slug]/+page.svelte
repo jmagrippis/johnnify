@@ -9,7 +9,7 @@
 <main class="container flex grow flex-col items-center px-2 pt-6">
 	<section class="brand-prose">
 		<h1>
-			{data.title}
+			Chapter {data.chapterNumber}: {data.title}
 		</h1>
 		{#if data.prevChapter}
 			<a

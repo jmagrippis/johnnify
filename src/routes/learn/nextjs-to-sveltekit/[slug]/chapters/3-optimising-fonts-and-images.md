@@ -1,6 +1,6 @@
 ---
-title: 'Chapter 3: Optimising Fonts and Images'
-description: 'Let’s create your home page and discuss the different ways you can style your application.'
+title: 'Optimising Fonts and Images'
+description: 'Let’s create your home page and discuss the different ways you can style your application'
 chapterNumber: 3
 ---
 
