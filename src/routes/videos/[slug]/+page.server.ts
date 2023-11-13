@@ -28,20 +28,21 @@ export const load: PageServerLoad = async ({params, locals: {supabase}}) => {
 	if (!body) {
 		throw new Error('could not render transcript...')
 	}
-
 	const likes = fetchYouTubeDetails([front_matter.youtubeId]).then(
 		([details]) => details.statistics.likeCount,
 	)
+	const mdParser = await getMdParser()
+	const content = mdParser.parse(body)
 
 	return {
 		front_matter,
+		content,
 		thumbnail: {
 			url: getYouTubeThumbnailFromId(front_matter.youtubeId),
 			width: 1280,
 			height: 720,
 		},
 		streamed: {
-			content: getMdParser().then((mdParser) => mdParser.parse(body)),
 			likes,
 		},
 		meta: {
