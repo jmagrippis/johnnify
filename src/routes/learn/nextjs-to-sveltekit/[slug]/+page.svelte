@@ -20,9 +20,7 @@
 			</a>
 		{/if}
 		<div>
-			{#await data.stream.content then content}
-				{@html content}
-			{/await}
+			{@html data.content}
 		</div>
 	</section>
 	{#if data.nextChapter}

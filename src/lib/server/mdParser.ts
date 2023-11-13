@@ -1,20 +1,22 @@
-import {getHighlighter} from 'shiki'
 import {Marked} from 'marked'
 import {markedSmartypants} from 'marked-smartypants'
+import {markedHighlight} from 'marked-highlight'
+import {getHighlighter} from 'shiki'
 
-let mdParser: Marked
 export const getMdParser = async (): Promise<Marked> => {
-	if (!mdParser) {
-		const highlighter = await getHighlighter({
-			theme: 'dracula',
-		})
-		mdParser = new Marked(markedSmartypants(), {
-			renderer: {
-				code(code, lang = 'sh') {
-					return highlighter.codeToHtml(code, {lang})
-				},
+	const marked = new Marked(
+		markedSmartypants(),
+		markedHighlight({
+			async: true,
+			async highlight(code, lang = 'bash') {
+				const highlighter = await getHighlighter({
+					theme: 'dracula',
+				})
+
+				return highlighter.codeToHtml(code, {lang})
 			},
-		})
-	}
-	return mdParser
+		}),
+	)
+
+	return marked
 }

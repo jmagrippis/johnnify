@@ -35,12 +35,11 @@ export const load: PageServerLoad = async ({params: {slug}}) => {
 		},
 	)
 
+	const mdParser = await getMdParser()
+	const content = await mdParser.parse(chapter.content)
+
 	return {
-		stream: {
-			content: getMdParser().then((mdParser) =>
-				mdParser.parse(chapter.content),
-			),
-		},
+		content,
 		title: chapter.front_matter.title,
 		chapterNumber: chapter.front_matter.chapterNumber,
 		prevChapter: prevChapter

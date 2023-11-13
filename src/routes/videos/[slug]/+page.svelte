@@ -32,8 +32,6 @@
 			<YouTubeIcon class="ml-1 w-5" />
 			! Add yours? 🫶
 		</a>
-		{#await data.streamed.content then content}
-			{@html content}
-		{/await}
+		{@html data.content}
 	</section>
 </main>
