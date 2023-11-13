@@ -56,7 +56,7 @@
 	}
 
 	.brand-prose {
-		@apply prose prose-lg prose-stone dark:prose-invert lg:prose-xl xl:prose-2xl prose-pre:px-4 prose-pre:py-2;
+		@apply prose prose-lg prose-stone dark:prose-invert lg:prose-xl xl:prose-2xl prose-code:px-2 prose-pre:m-0 prose-pre:bg-transparent prose-pre:p-0;
 	}
 
 	/* css vars */
