@@ -47,13 +47,13 @@ export const load: PageServerLoad = async ({params: {slug}}) => {
 			? {
 					slug: prevChapter.slug,
 					chapterNumber: prevChapter.front_matter.chapterNumber,
-			  }
+				}
 			: null,
 		nextChapter: nextChapter
 			? {
 					slug: nextChapter.slug,
 					chapterNumber: nextChapter.front_matter.chapterNumber,
-			  }
+				}
 			: null,
 		meta: {
 			title: `Learn SvelteKit! ${chapter.front_matter.title}`,

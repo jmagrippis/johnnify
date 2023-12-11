@@ -108,6 +108,7 @@
 					$theme = nextTheme
 				}}
 			>
+				<span class="sr-only">toggle theme</span>
 				<ThemeToggleIcon className="w-6" />
 			</button>
 		</div>
