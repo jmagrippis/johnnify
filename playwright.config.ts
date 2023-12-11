@@ -77,6 +77,6 @@ export default defineConfig({
 				command: 'bun run --bun dev',
 				port: 5173,
 				reuseExistingServer: true,
-		  }
+			}
 		: undefined,
 })
