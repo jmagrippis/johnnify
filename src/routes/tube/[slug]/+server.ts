@@ -9,6 +9,7 @@ const slugsToVideoUrls: Record<string, string> = {
 	'text-gradient': 'www.youtube.com/watch?v=Bual_cAToQQ',
 	'view-transitions': 'www.youtube.com/watch?v=qcgGJ0J3yOA',
 	'google-fonts': 'www.youtube.com/watch?v=TKKpVlZRFLc',
+	'list-to-detail': 'www.youtube.com/watch?v=suuxXrMs5P4',
 }
 
 export const GET: RequestHandler = ({request, url, params: {slug}}) => {
