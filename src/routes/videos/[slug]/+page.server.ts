@@ -17,7 +17,7 @@ export const load: PageServerLoad = async ({params, locals: {supabase}}) => {
 		throw selectError
 	}
 	if (!data) {
-		throw error(404, 'Not Found')
+		error(404, 'Not Found')
 	}
 
 	const front_matter = data.front_matter as FrontMatter

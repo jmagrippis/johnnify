@@ -10,14 +10,14 @@ export const load: PageServerLoad = async ({url}) => {
 		// Someone may be trying to be cheeky.
 		// Users should only be able to get here
 		// through a Stripe redirect with a valid session_id.
-		throw redirect(303, '/')
+		redirect(303, '/')
 	}
 
 	const checkoutSession = await stripe.checkout.sessions.retrieve(session_id)
 
 	if (!checkoutSession || checkoutSession.status !== 'complete') {
 		// Redirect when it's not a valid, completed checkout session
-		throw redirect(303, '/')
+		redirect(303, '/')
 	}
 
 	return {

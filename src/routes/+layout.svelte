@@ -1,6 +1,5 @@
 <script lang="ts">
 	import '@fontsource-variable/inconsolata'
-	import '@fontsource/noto-color-emoji/emoji.css'
 
 	import '../app.css'
 

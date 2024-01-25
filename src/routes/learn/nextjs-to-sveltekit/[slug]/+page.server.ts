@@ -7,7 +7,7 @@ import {getMdParser} from '$lib/server/mdParser'
 export const load: PageServerLoad = async ({params: {slug}}) => {
 	const chapter = chapters.find((chapter) => chapter.slug === slug)
 	if (!chapter) {
-		throw error(404, 'Not Found')
+		error(404, 'Not Found')
 	}
 
 	const {nextChapter, prevChapter} = chapters.reduce<{

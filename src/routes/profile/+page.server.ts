@@ -9,7 +9,7 @@ export const load: PageServerLoad = async ({
 
 	// if the user is NOT logged in return them to the home page
 	if (!session) {
-		throw redirect(303, '/login')
+		redirect(303, '/login')
 	}
 
 	// check if the user has a subscription
@@ -48,10 +48,10 @@ export const actions: Actions = {
 			throw new Error('could not create portal session with Stripe')
 		}
 
-		throw redirect(303, portalSession.url)
+		redirect(303, portalSession.url)
 	},
 	signOut: async ({locals: {supabase}}) => {
 		await supabase.auth.signOut()
-		throw redirect(303, '/')
+		redirect(303, '/')
 	},
 }

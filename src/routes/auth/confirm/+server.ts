@@ -23,15 +23,15 @@ export const GET = async ({url, locals: {supabase}}) => {
 		typeof type !== 'string' ||
 		!isEmailOtpType(type)
 	) {
-		throw error(400, 'Invalid parameters given')
+		error(400, 'Invalid parameters given')
 	}
 
 	if (token_hash && type) {
 		const {error} = await supabase.auth.verifyOtp({token_hash, type})
 		if (!error) {
-			throw redirect(303, `/${next.slice(1)}`)
+			redirect(303, `/${next.slice(1)}`)
 		}
 	}
 
-	throw error(400, 'Something went wrong validating your credentials')
+	error(400, 'Something went wrong validating your credentials')
 }

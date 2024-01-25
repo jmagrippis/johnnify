@@ -8,7 +8,7 @@ export const load: PageServerLoad = async ({locals: {getSession}}) => {
 	// they should only reach this page by clicking
 	// a password reset email!
 	if (!session) {
-		throw redirect(303, '/login')
+		redirect(303, '/login')
 	}
 
 	return {
@@ -40,6 +40,6 @@ export const actions = {
 			})
 		}
 
-		throw redirect(303, '/profile')
+		redirect(303, '/profile')
 	},
 }

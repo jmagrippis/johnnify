@@ -32,5 +32,5 @@ export const GET: RequestHandler = ({request, url}) => {
 			url: url.href,
 		})
 	}
-	throw redirect(303, redirectUrl)
+	redirect(303, redirectUrl)
 }

@@ -1,9 +1,4 @@
-import {
-	combineChunks,
-	createBrowserClient,
-	isBrowser,
-	parse,
-} from '@supabase/ssr'
+import {createBrowserClient, isBrowser, parse} from '@supabase/ssr'
 import {PUBLIC_SUPABASE_ANON_KEY, PUBLIC_SUPABASE_URL} from '$env/static/public'
 import type {LayoutLoad} from './$types'
 import type {Database} from '$lib/generated/DatabaseDefinitions'
@@ -24,11 +19,8 @@ export const load: LayoutLoad = async ({fetch, data, depends}) => {
 						return JSON.stringify(data.session)
 					}
 
-					const cookie = combineChunks(key, (name) => {
-						const cookies = parse(document.cookie)
-						return cookies[name]
-					})
-					return cookie
+					const cookie = parse(document.cookie)
+					return cookie[key]
 				},
 			},
 		},

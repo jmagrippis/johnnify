@@ -42,5 +42,5 @@ export const GET: RequestHandler = ({request, url, params: {slug}}) => {
 		})
 	}
 
-	throw redirect(303, redirectUrl)
+	redirect(303, redirectUrl)
 }
