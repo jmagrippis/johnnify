@@ -73,6 +73,6 @@ export const actions: Actions = {
 			throw Error('could not create checkout session with Stripe')
 		}
 
-		throw redirect(303, checkoutSession.url)
+		redirect(303, checkoutSession.url)
 	},
 }

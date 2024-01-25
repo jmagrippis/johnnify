@@ -7,7 +7,7 @@ export const load: PageServerLoad = async ({locals: {getSession}}) => {
 
 	// if the user is already logged in return them to their profile page
 	if (session) {
-		throw redirect(303, '/profile')
+		redirect(303, '/profile')
 	}
 
 	return {
@@ -51,7 +51,7 @@ export const actions = {
 			})
 		}
 
-		throw redirect(303, '/profile')
+		redirect(303, '/profile')
 	},
 
 	signUp: async ({request, url, locals: {supabase}}) => {
@@ -162,7 +162,7 @@ export const actions = {
 			})
 		}
 
-		throw redirect(303, data.url)
+		redirect(303, data.url)
 	},
 
 	reset: async ({request, url, locals: {supabase}}) => {

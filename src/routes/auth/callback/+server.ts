@@ -5,15 +5,15 @@ export const GET = async ({url, locals: {supabase}}) => {
 	const next = url.searchParams.get('next') ?? '/profile'
 
 	if (typeof code !== 'string' || typeof next !== 'string') {
-		throw error(400, 'Invalid parameters given')
+		error(400, 'Invalid parameters given')
 	}
 
 	if (code) {
 		const {error} = await supabase.auth.exchangeCodeForSession(code)
 		if (!error) {
-			throw redirect(303, `/${next.slice(1)}`)
+			redirect(303, `/${next.slice(1)}`)
 		}
 	}
 
-	throw error(400, 'Something went wrong validating your credentials')
+	error(400, 'Something went wrong validating your credentials')
 }

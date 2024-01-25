@@ -27,7 +27,7 @@
 	</g>
 </svg>
 
-<style>
+<style lang="postcss">
 	svg .moon,
 	svg .sun,
 	svg .sun-beams {

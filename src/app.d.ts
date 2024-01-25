@@ -1,6 +1,7 @@
 import '@poppanator/sveltekit-svg/dist/svg'
 import type {Session, SupabaseClient} from '@supabase/supabase-js'
-import type {Database} from './lib/generated/DatabaseDefinitions'
+
+import type {Database} from '$lib/generated/DatabaseDefinitions'
 
 // See https://kit.svelte.dev/docs/types#app
 // for information about these interfaces
@@ -13,7 +14,7 @@ declare global {
 	namespace App {
 		// interface Error {}
 		interface Locals {
-			supabase: SupabaseClient<Database>
+			supabase: SupabaseClient
 			getSession(): Promise<Session | null>
 		}
 		interface PageData {
