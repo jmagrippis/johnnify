@@ -1,17 +1,15 @@
 <script lang="ts">
 	import type {EventHandler} from 'svelte/elements'
 
-	import {PUBLIC_SUPABASE_URL} from '$env/static/public'
 	import Button from '$lib/components/Button.svelte'
 	import Spinner from '$lib/icons/spinner.svg?component'
 	import PageTitle from '$lib/components/PageTitle.svelte'
+	import {page} from '$app/stores'
 
 	let formState: 'idle' | 'submitting' | 'replying' | 'done' | Error = 'idle'
 
 	let questions: string[] = []
 	let answers: string[] = []
-
-	const vectorFunctionUrl = `${PUBLIC_SUPABASE_URL}/functions/v1/vector-search`
 
 	const onSubmit: EventHandler<SubmitEvent, HTMLFormElement> = (event) => {
 		let question = new FormData(event.currentTarget).get('question')
@@ -24,7 +22,7 @@
 		answers[currentAnswerIndex] = ''
 		formState = 'submitting'
 
-		const queryUrl = new URL(vectorFunctionUrl)
+		const queryUrl = new URL(`${$page.url.origin}/api/youtube/vector-search`)
 		queryUrl.searchParams.set('query', question)
 
 		const eventSource = new EventSource(queryUrl)
