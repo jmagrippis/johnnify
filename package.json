@@ -13,7 +13,8 @@
 		"format": "prettier --write .",
 		"generate:supabase": "supabase gen types typescript --local > src/lib/generated/DatabaseDefinitions.ts",
 		"generate:json2ts": "json2ts -i 'json-schemas/**/*.json' -o src/lib/generated --format=false",
-		"generate": "bun run generate:supabase && bun run generate:json2ts && prettier --write ./src/lib/generated"
+		"generate": "bun run generate:supabase && bun run generate:json2ts && prettier --write ./src/lib/generated",
+		"update": "bunx npm-check-updates -ui"
 	},
 	"devDependencies": {
 		"@fontsource-variable/inconsolata": "^5.0.16",
