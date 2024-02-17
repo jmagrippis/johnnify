@@ -81,9 +81,7 @@
 				{#if i === answers.length - 1 && formState === 'submitting'}
 					<Spinner class="w-12 self-center text-emphasis" />
 				{:else}
-					<div
-						class="overflow-x-scroll break-words rounded bg-secondary-800 px-4 py-2 text-xl text-white"
-					>
+					<div class="answer">
 						{@html answer}
 					</div>
 				{/if}
@@ -106,3 +104,13 @@
 		</Button>
 	</form>
 </main>
+
+<style lang="postcss">
+	.answer {
+		@apply overflow-x-scroll whitespace-pre-wrap break-words rounded bg-secondary-800 px-4 py-2 text-xl text-white;
+
+		& > pre {
+			@apply whitespace-pre-wrap;
+		}
+	}
+</style>

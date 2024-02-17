@@ -15,7 +15,8 @@ export type Chapter = {
 const SLUG_REGEX = /\.\/chapters\/(.+)\.md/gm
 
 const rawChapters = import.meta.glob('./chapters/*.md', {
-	as: 'raw',
+	query: '?raw',
+	import: 'default',
 	eager: true,
 })
 

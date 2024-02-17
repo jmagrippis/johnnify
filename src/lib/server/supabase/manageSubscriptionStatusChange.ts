@@ -75,7 +75,7 @@ export const manageSubscriptionStatusChange = async (
 	} else {
 		if (!email) {
 			throw new Error(
-				`Failed to create user for stripe_customer_id ${customerId}`,
+				`Could not find user for stripe_customer_id ${customerId}, no email so we cannot create one`,
 			)
 		}
 		const user = await getUserViaEmail(email)
