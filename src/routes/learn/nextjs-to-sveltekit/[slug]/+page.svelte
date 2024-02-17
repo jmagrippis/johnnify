@@ -20,7 +20,7 @@
 			</a>
 		{/if}
 		<div>
-			{#await data.stream.content then content}
+			{#await data.content then content}
 				{@html content}
 			{/await}
 		</div>

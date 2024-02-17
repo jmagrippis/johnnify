@@ -27,12 +27,12 @@
 			rel="noopener noreferrer"
 			class="flex justify-end text-sm text-emphasis hover:text-emphasis-hover"
 		>
-			{#await data.streamed.likes then likes}{likes}{/await}
+			{#await data.likes then likes}{likes}{/await}
 			❤️ over @
 			<YouTubeIcon class="ml-1 w-5" />
 			! Add yours? 🫶
 		</a>
-		{#await data.streamed.content then content}
+		{#await data.content then content}
 			{@html content}
 		{/await}
 	</section>

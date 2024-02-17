@@ -4,7 +4,7 @@ import type {PageServerLoad} from './$types'
 import {fetchYouTubeDetails} from '$lib/server/youtube'
 import type {FrontMatter} from '$lib/generated/frontMatter'
 import {getYouTubeThumbnailFromId} from '$lib/getYouTubeThumbnailFromId'
-import {getMdParser} from '$lib/server/mdParser'
+import {parseMd} from '$lib/server/mdParser'
 
 export const load: PageServerLoad = async ({params, locals: {supabase}}) => {
 	const {data, error: selectError} = await supabase
@@ -40,10 +40,8 @@ export const load: PageServerLoad = async ({params, locals: {supabase}}) => {
 			width: 1280,
 			height: 720,
 		},
-		streamed: {
-			content: getMdParser().then((mdParser) => mdParser.parse(body)),
-			likes,
-		},
+		content: parseMd(body),
+		likes,
 		meta: {
 			title: front_matter.title,
 			description: `A video by Johnny: ${front_matter.snippet}`,
