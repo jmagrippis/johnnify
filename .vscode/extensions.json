@@ -3,7 +3,6 @@
 	"recommendations": [
 		"codezombiech.gitignore",
 		"dbaeumer.vscode-eslint",
-		"denoland.vscode-deno",
 		"esbenp.prettier-vscode",
 		"github.vscode-github-actions",
 		"mikestead.dotenv",
